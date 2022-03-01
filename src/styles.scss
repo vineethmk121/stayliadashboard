@@ -1,0 +1,45 @@
+@use '@angular/material' as mat;
+@import './scss/variables';
+@import './scss/form';
+@import './scss/table';
+@import './scss/page';
+@import './assets/fonts/Roboto/style';
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+html, body { height: 100%; }
+body { margin: 0; }
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+    border-radius: 5px;
+}
+
+
+@include mat.core();
+$Staliya-primary: mat.define-palette($primary-palette);
+$Staliya-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$Staliya-warn: mat.define-palette(mat.$red-palette);
+$Staliya-theme: mat.define-light-theme((
+  color: (
+    primary: $Staliya-primary,
+    accent: $Staliya-accent,
+    warn: $Staliya-warn,
+  )
+));
+@include mat.all-component-themes($Staliya-theme);

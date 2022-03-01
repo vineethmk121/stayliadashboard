@@ -1,0 +1,85 @@
+<div class="content">
+    <div class="top-section">
+        <div class="bredcrum">
+            <a href="javascript:;" routerLink="/dashboard">Home</a>
+            <span>/</span>
+            <span>My Agents</span>
+        </div>
+        <button mat-raised-button class="success add-user" routerLink="/user/create"><span class="iconify" data-icon="carbon:add-alt"></span> Add New Agent</button>
+    </div>
+    <div class="header">
+        <div class="title">My Agents</div>
+        <div class="right-section">
+            <div class="input-group search">
+                <input class="form-control" placeholder="Search" type="text">
+                <div class="input-group-append">
+                    <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>FName</th>
+                <th>LName</th>
+                <th>DOB</th>
+                <th>User Type</th>
+                <th>Mobile</th>
+                <th>Gender</th>
+                <th class="action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Raj</td>
+                <td>Kesavr</td>
+                <td>12/6/2021</td>
+                <td>Admin</td>
+                <td>07373855998</td>
+                <td>Male</td>
+                <td class="action">
+                    <button mat-mini-fab class="success action-button" routerLink="/user/view"><span class="iconify" data-icon="entypo:eye"></span></button>
+                    <button mat-mini-fab class="info action-button" routerLink="/user/update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>Prem</td>
+                <td>kumar</td>
+                <td>12/6/1995</td>
+                <td>Country Admin</td>
+                <td>69587213598</td>
+                <td>male</td>
+                <td class="action">
+                    <button mat-mini-fab class="success action-button" routerLink="/user/view"><span class="iconify" data-icon="entypo:eye"></span></button>
+                    <button mat-mini-fab class="info action-button" routerLink="/user/update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-left"></span></a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">1</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="javascript:;">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">5</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-right"></span></a>
+        </li>
+    </ul>
+</div>

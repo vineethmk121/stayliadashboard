@@ -1,0 +1,106 @@
+<div class="content">
+    <div class="top-section">
+        <div class="bredcrum">
+            <a href="javascript:;" routerLink="/dashboard">Home</a>
+            <span>/</span>
+            <a href="javascript:;" routerLink="/user">User</a>
+            <span>/</span>
+            <span>Update</span>
+        </div>
+    </div>
+    <div class="header">
+        <div class="title">Update User</div>
+        <button mat-raised-button class="success"><span class="iconify" data-icon="carbon:add-alt"></span> Update</button>
+    </div>
+    <div class="form-section">
+        <div class="section-item">
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Mobile</mat-label>
+                <input matInput placeholder="Mobile">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Gender</mat-label>
+                <mat-select>
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput type="date" placeholder="Date of Birth">
+            </mat-form-field>
+        </div>
+        <hr/>
+        <div class="section-item">
+            <div class="form-control item">
+                <mat-label>Profile Picture</mat-label>&nbsp;
+                <input type="file" placeholder="Picture">
+            </div>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>User Role</mat-label>
+                <mat-select>
+                    <mat-option value="Super Admin">Super Admin</mat-option>
+                    <mat-option value="Country Admin">Country Admin</mat-option>
+                    <mat-option value="Data Admin">Data Admin</mat-option>
+                    <mat-option value="Data Manager">Data Manager</mat-option>
+                    <mat-option value="Data Team Lead">Data Team Lead</mat-option>
+                    <mat-option value="Data Agent">Data Agent</mat-option>
+                    <mat-option value="Builder User">Builder User</mat-option>
+                    <mat-option value="Builder Manager">Builder Manager</mat-option>
+                    <mat-option value="Builder Team Lead">Builder Team Lead</mat-option>
+                    <mat-option value="Builder Data Agent">Builder Data Agent</mat-option>
+                    <mat-option value="Agency User">Agency User</mat-option>
+                    <mat-option value="Agent User">Agent User</mat-option>
+                    <mat-option value="Landlord User">Landlord User</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Parent Agency</mat-label>
+                <mat-select>
+                    <mat-option value="Select Agency">Select Agency</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <hr/>
+        <div class="section-item">
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Building</mat-label>
+                <input matInput placeholder="Building">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="State">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Locality</mat-label>
+                <input matInput placeholder="Locality">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Country</mat-label>
+                <mat-select>
+                    <mat-option value="USA">USA</mat-option>
+                    <mat-option value="India">India</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <hr/>
+        <div class="section-item">
+            <mat-slide-toggle class="form-control item">Email Notification</mat-slide-toggle>
+            <mat-slide-toggle class="form-control item">Push Notification</mat-slide-toggle>
+            <mat-slide-toggle class="form-control item">Text Messages</mat-slide-toggle>
+        </div>
+    </div>
+</div>

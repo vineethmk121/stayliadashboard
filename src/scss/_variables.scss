@@ -1,0 +1,58 @@
+$primary-color:#5e72e4;
+$shadow:0 2px 4px rgb(15 34 58 / 12%);
+$success:#2dce89;
+$info:#11cdef;
+$primary:$primary-color;
+$danger:#f5365c;
+$warning:#fb6340;
+$default:#172b4d;
+$secondary:#5e72e42b;
+$secondary-text:#212529;
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xl:                ($font-size-base * 1.5);
+$font-size-lg:                ($font-size-base * 1.25);
+$font-size-sm:                ($font-size-base * .875);
+$font-size-xs:                ($font-size-base * .75);
+
+$dark-primary-text: rgba(black, 0.87);
+$dark-secondary-text: rgba(black, 0.54);
+$dark-disabled-text: rgba(black, 0.38);
+$dark-dividers: rgba(black, 0.12);
+$dark-focused: rgba(black, 0.12);
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+$light-dividers: rgba(white, 0.12);
+$light-focused: rgba(white, 0.12);
+$primary-palette: (
+  50: #5e72e456,
+  100: #5e72e463,
+  200: #5e72e46e,
+  300: #5e72e479,
+  400: #5e72e486,
+  500: #5e72e493,
+  600: #5e72e4a2,
+  700: #5e72e4b0,
+  800: #5e72e4be,
+  900: #5e72e4c9,
+  A100: #5e72e4d7,
+  A200: #5e72e4ec,
+  A400: #5e72e4e8,
+  A700: #5e72e4,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);

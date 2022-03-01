@@ -1,0 +1,89 @@
+<div class="content">
+    <div class="top-section">
+        <div class="bredcrum">
+            <a href="javascript:;" routerLink="/dashboard">Home</a>
+            <span>/</span>
+            <span>Filter</span>
+        </div>
+        <button mat-raised-button class="success add-user" (click)="openCreateDialog()"><span class="iconify" data-icon="carbon:add-alt"></span> Add New Filter</button>
+    </div>
+    <div class="header">
+        <div class="title">Filter</div>
+        <div class="right-section">
+            <div class="input-group search">
+                <input class="form-control" placeholder="Search" type="text">
+                <div class="input-group-append">
+                    <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th class="action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Villa</td>
+                <td class="action">
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>Town house</td>
+                <td class="action">
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>Plot</td>
+                <td class="action">
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>Penthouse</td>
+                <td class="action">
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>Apartment</td>
+                <td class="action">
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-left"></span></a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">1</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link" href="javascript:;">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">4</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;">5</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-right"></span></a>
+        </li>
+    </ul>
+</div>

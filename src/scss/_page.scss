@@ -1,0 +1,29 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        .title{
+            font-size: 1.0625rem;
+        }
+        .right-section{
+            display: flex;
+            align-items: center;
+            flex-basis: 420px;
+            .search{
+                margin-right: 10px;
+                flex-basis: 600px
+            }
+            select{
+                margin-right: 10px;
+            }
+        }
+        button{
+            color: white;
+        }
+    }
+}
