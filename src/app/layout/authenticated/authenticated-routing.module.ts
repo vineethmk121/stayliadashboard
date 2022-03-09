@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren:()=>import('../../property-type/property-type.module').then(m=>m.PropertyTypeModule)
   },
   {
+    path:'property-category',
+    loadChildren:()=>import('../../property-categories/property-category.module').then(m=>m.PropertyCategoryModule)
+  },
+ 
+  {
     path:'additional-information',
     loadChildren:()=>import('../../additional-information/additional-information.module').then(m=>m.AdditionalInformationModule)
   },

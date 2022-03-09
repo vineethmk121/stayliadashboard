@@ -9,12 +9,14 @@ import { UnauthenticatedComponent } from './layout/unauthenticated/unauthenticat
 import { GlobalModule } from './global/global.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     AuthenticatedComponent,
-    UnauthenticatedComponent
+    UnauthenticatedComponent,
+    
   ],
   imports: [
     BrowserModule,
