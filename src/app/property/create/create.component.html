@@ -1,191 +1,282 @@
 <div class="content">
-    <div class="top-section">
-        <div class="bredcrum">
-            <a href="javascript:;" routerLink="/dashboard">Home</a>
-            <span>/</span>
-            <a href="javascript:;" routerLink="/property">Properties</a>
-            <span>/</span>
-            <span>Create</span>
-        </div>
+  <div class="top-section">
+    <div class="bredcrum">
+      <a href="javascript:;" routerLink="/dashboard">Home</a>
+      <span>/</span>
+      <a href="javascript:;" routerLink="/property">Properties</a>
+      <span>/</span>
+      <span>Create</span>
     </div>
-    <div class="header">
-        <div class="title">Add New Property</div>
-        <button mat-raised-button class="success"><span class="iconify" data-icon="carbon:add-alt"></span> Create</button>
-    </div>
-    <div class="form-section">
-        <form [formGroup]="propertyForm">
-        <div class="section-item oneline">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Title</mat-label>
-                <input formControlName="title" matInput (change)="onFieldChange()" placeholder="Title">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" (change)="onFieldChange()" placeholder="Description"></textarea>
-            </mat-form-field>
-        </div>
+  </div>
+  <div class="header">
+    <div class="title">Add New Property</div>
+    <button mat-raised-button class="success">
+      <span class="iconify" data-icon="carbon:add-alt"></span> Create
+    </button>
+  </div>
+  <div class="form-section">
+    <form [formGroup]="propertyForm">
+      <div class="section-item oneline">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Title</mat-label>
+          <input
+            formControlName="title"
+            matInput
+            (change)="onFieldChange()"
+            placeholder="Title"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            (change)="onFieldChange()"
+            placeholder="Description"
+          ></textarea>
+        </mat-form-field>
+      </div>
     </form>
     <div class="title-section">
-        <hr/>
-        <label>Property</label>
+      <hr />
+      <label>Property</label>
     </div>
     <div class="section-item">
-        <mat-tab-group>
-            <mat-tab label="Property Feature"> 
-                <div class="section-item oneline">
-                <mat-form-field appearance="outline" class="item">
-                    <mat-label>Type of BHK</mat-label>
-                    <input matInput  placeholder="Enter BHK">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="item">
-
-
-
-                    
-                    <mat-label>Possesion Date</mat-label>
-                    <input matInput  placeholder="Possesion Date">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="item">
-                    <mat-label>Price Per Square feet</mat-label>
-                    <input matInput  placeholder="Enter Price Per Square foot">
-                </mat-form-field>
-            </div> </mat-tab>
-            <mat-tab label="Second"> Content 2 </mat-tab>
-            <mat-tab label="Third"> Content 3 </mat-tab>
-          </mat-tab-group>
-          
+      <mat-tab-group>
+        <mat-tab label="Property Feature">
+          <div class="section-item oneline">
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Type of BHK</mat-label>
+              <input matInput placeholder="Enter BHK" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Possesion Date</mat-label>
+              <input matInput placeholder="Possesion Date" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Price Per Square feet</mat-label>
+              <input matInput placeholder="Enter Price Per Square foot" />
+            </mat-form-field>
+          </div>
+        </mat-tab>
+        <mat-tab label="Overview">
+          <div class="section-item oneline">
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Status</mat-label>
+              <input matInput placeholder="Status" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Total area</mat-label>
+              <input matInput placeholder="Total Area" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Total Launched apartments</mat-label>
+              <input matInput placeholder="Total Launched apartments" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+              <mat-label> Availability</mat-label>
+              <input matInput placeholder="Total Launched apartments" />
+            </mat-form-field>
+            <angular-editor [config]="editorConfig"></angular-editor>
+          </div>
+        </mat-tab>
+        <mat-tab label="Configuration">
+          <div class="section-item oneline" *ngIf="isAdding">
+            <mat-label>Conifg Image</mat-label>
+            <input type="file" />
+            <mat-form-field appearance="outline" class="item">
+              <mat-label>Config Title</mat-label>
+              <input matInput placeholder="Enter Config Title" />
+            </mat-form-field>
+          </div>
+          <div>
+            <button (click)="onClickAddRowConfig()">Add Row</button>
+          </div>
+        </mat-tab>
+        <mat-tab label="Sidebar">SideBar</mat-tab>
+      </mat-tab-group>
     </div>
-        <div class="title-section">
-            <hr/>
-            <label>Address</label>
-        </div>
-        <div class="section-item">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>FlatNo</mat-label>
-                <input matInput placeholder="FlatNo">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Street</mat-label>
-                <input matInput placeholder="Street">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>City</mat-label>
-                <input matInput placeholder="City">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>State</mat-label>
-                <input matInput placeholder="State">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Country</mat-label>
-                <mat-select>
-                    <mat-option value="USA">USA</mat-option>
-                    <mat-option value="India">India</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="title-section">
-            <hr/>
-            <label>Post Info</label>
-        </div>
-        <div class="section-item oneline">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Selling Price</mat-label>
-                <input matInput placeholder="Selling Price">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Discount Price</mat-label>
-                <input matInput placeholder="Discount Price">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Deposit</mat-label>
-                <input matInput placeholder="Deposit">
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Rent</mat-label>
-                <input matInput placeholder="Rent">
-            </mat-form-field>
-        </div>
-        <div class="title-section">
-            <hr/>
-            <label>Addional Information</label>
-        </div>
-        <div class="section-item">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Additional Info</mat-label>
-                <input matInput placeholder="Additional Info">
-            </mat-form-field>
-        </div>
-        <div class="title-section">
-            <hr/>
-            <label>Property Information</label>
-        </div>
-        <div class="section-item">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Property Type</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Overview</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Amenities</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Bedroom Types</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Furnishing</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Tags</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="title-section">
-            <hr/>
-            <label>Gallery</label>
-        </div>
-        <div class="section-item">
-            <div class="form-control item">
-                <mat-label>Gallery Images</mat-label>&nbsp;
-                <input type="file" placeholder="Picture">
-            </div>
-            <div class="form-control item">
-                <mat-label>Slider Images</mat-label>&nbsp;
-                <input type="file" placeholder="Picture">
-            </div>
-            <div class="form-control item">
-                <mat-label>Property Plains</mat-label>&nbsp;
-                <input type="file" placeholder="Picture">
-            </div>
-        </div>
-        <div class="title-section">
-            <hr/>
-            <label>User Info</label>
-        </div>
-        <div class="section-item">
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>Agency</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-                <mat-label>agent</mat-label>
-                <mat-select> 
-                </mat-select>
-            </mat-form-field>
-            <mat-slide-toggle class="form-control item" color="primary">Is Approved</mat-slide-toggle>
-        </div>
+    <div class="title-section">
+      <hr />
+      <label>Location</label>
     </div>
+    <div *ngIf="apiLoaded | async">
+      <google-map></google-map>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>NeighbourHood</mat-label>
+        <input matInput placeholder="NeighbourHood" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>FlatNo</mat-label>
+        <input matInput placeholder="FlatNo" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Street</mat-label>
+        <input matInput placeholder="Street" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>City</mat-label>
+        <input matInput placeholder="City" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>ZipCode</mat-label>
+        <input matInput placeholder="ZipCode" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>State</mat-label>
+        <input matInput placeholder="State" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Country</mat-label>
+        <mat-select>
+          <mat-option value="USA">USA</mat-option>
+          <mat-option value="India">India</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
+      <!-- <label>Post Info</label> -->
+      <label>Details</label>
+    </div>
+    <div class="section-item oneline">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Selling Price</mat-label>
+        <input matInput placeholder="Selling Price" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Price Label(e.g."per month")</mat-label>
+        <input matInput placeholder="Label" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Discount Price</mat-label>
+        <input matInput placeholder="Discount Price" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Area(sq ft)</mat-label>
+        <input matInput placeholder="Area(sq ft)" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Bedroom</mat-label>
+        <input matInput placeholder="Bedroom" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Bathrooms</mat-label>
+        <input matInput placeholder="Bathrooms" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Deposit</mat-label>
+        <input matInput placeholder="Deposit" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Rent</mat-label>
+        <input matInput placeholder="Rent" />
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Addional Information</label>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Additional Info</mat-label>
+        <input matInput placeholder="Additional Info" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Built In</mat-label>
+        <input matInput placeholder="Built In" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Parking Spaces</mat-label>
+        <input matInput placeholder="Parking Spaces" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Room Count</mat-label>
+        <input matInput placeholder="Room Count" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Unit Count</mat-label>
+        <input matInput placeholder="Unit Count" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Lot Depth</mat-label>
+        <input matInput placeholder="Lot Depth" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Lot Width</mat-label>
+        <input matInput placeholder="Lot Width" />
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Property Information</label>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Property Type</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Overview</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Amenities</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Bedroom Types</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Furnishing</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Tags</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Gallery</label>
+    </div>
+    <div class="section-item">
+      <div class="form-control item">
+        <mat-label>Gallery Images</mat-label>&nbsp;
+        <input type="file" placeholder="Picture" />
+      </div>
+      <div class="form-control item">
+        <mat-label>Slider Images</mat-label>&nbsp;
+        <input type="file" placeholder="Picture" />
+      </div>
+      <div class="form-control item">
+        <mat-label>Property Plains</mat-label>&nbsp;
+        <input type="file" placeholder="Picture" />
+      </div>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>User Info</label>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Agency</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>agent</mat-label>
+        <mat-select> </mat-select>
+      </mat-form-field>
+      <mat-slide-toggle class="form-control item" color="primary"
+        >Is Approved</mat-slide-toggle
+      >
+    </div>
+  </div>
 </div>

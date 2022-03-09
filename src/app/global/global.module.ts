@@ -13,7 +13,9 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatTabsModule} from '@angular/material/tabs'
+import {MatTabsModule} from '@angular/material/tabs';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -40,7 +42,9 @@ import { FooterComponent } from './footer/footer.component';
     MatDialogModule,
     MatCardModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularEditorModule,
+    HttpClientModule
   ],
   exports:[
     HeaderComponent,
@@ -57,7 +61,9 @@ import { FooterComponent } from './footer/footer.component';
     MatDialogModule,
     MatCardModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    AngularEditorModule,
+    HttpClientModule
   ]
 })
 export class GlobalModule { }

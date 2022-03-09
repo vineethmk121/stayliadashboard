@@ -8,20 +8,23 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { ViewComponent } from './view/view.component';
 import { GlobalModule } from '../global/global.module';
-
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     ListComponent,
     CreateComponent,
     UpdateComponent,
-    ViewComponent
+    ViewComponent,
   ],
   imports: [
     CommonModule,
     PropertyRoutingModule,
     GlobalModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    HttpClientJsonpModule,
+    GoogleMapsModule,
+  ],
 })
-export class PropertyModule { }
+export class PropertyModule {}
