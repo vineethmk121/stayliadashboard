@@ -13,10 +13,12 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatTabsModule} from '@angular/material/tabs'
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTabsModule
   ],
   exports:[
     HeaderComponent,
@@ -53,7 +56,8 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTabsModule
   ]
 })
 export class GlobalModule { }

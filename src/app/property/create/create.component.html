@@ -13,16 +13,48 @@
         <button mat-raised-button class="success"><span class="iconify" data-icon="carbon:add-alt"></span> Create</button>
     </div>
     <div class="form-section">
+        <form [formGroup]="propertyForm">
         <div class="section-item oneline">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Title</mat-label>
-                <input matInput placeholder="Title">
+                <input formControlName="title" matInput (change)="onFieldChange()" placeholder="Title">
             </mat-form-field>
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Description"></textarea>
+                <textarea matInput formControlName="description" (change)="onFieldChange()" placeholder="Description"></textarea>
             </mat-form-field>
         </div>
+    </form>
+    <div class="title-section">
+        <hr/>
+        <label>Property</label>
+    </div>
+    <div class="section-item">
+        <mat-tab-group>
+            <mat-tab label="Property Feature"> 
+                <div class="section-item oneline">
+                <mat-form-field appearance="outline" class="item">
+                    <mat-label>Type of BHK</mat-label>
+                    <input matInput  placeholder="Enter BHK">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="item">
+
+
+
+                    
+                    <mat-label>Possesion Date</mat-label>
+                    <input matInput  placeholder="Possesion Date">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="item">
+                    <mat-label>Price Per Square feet</mat-label>
+                    <input matInput  placeholder="Enter Price Per Square foot">
+                </mat-form-field>
+            </div> </mat-tab>
+            <mat-tab label="Second"> Content 2 </mat-tab>
+            <mat-tab label="Third"> Content 3 </mat-tab>
+          </mat-tab-group>
+          
+    </div>
         <div class="title-section">
             <hr/>
             <label>Address</label>
