@@ -215,6 +215,61 @@
     </div>
     <div class="title-section">
       <hr />
+      <label>Amenities</label>
+    </div>
+    <div class="section-item">
+      <div *ngFor="let amen of Amenties" class="padding:10px">
+        <mat-checkbox
+          class="example-margin"
+          style="margin-left: 20px"
+          [value]="amen.value"
+          >{{ amen.name }}</mat-checkbox
+        >
+      </div>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Floor Plans</label>
+    </div>
+    <div class="section-item">
+      <div class="form-control item">
+        <mat-label>Add Plan Image</mat-label>&nbsp;
+        <input type="file" placeholder="Picture" />
+      </div>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Agent</label>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Select Agents</mat-label>
+        <mat-select>
+          <mat-option value="vinod">Agent Vinod</mat-option>
+          <mat-option value="Bruce">BruceLee</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
+      <label>Video</label>
+    </div>
+    <div class="section-item">
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Video Source</mat-label>
+        <mat-select>
+          <mat-option value="vinod">none</mat-option>
+          <mat-option value="youtube">Youtube</mat-option>
+          <mat-option value="vinemo">Vinemo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="item">
+        <mat-label>Video Id</mat-label>
+        <input matInput placeholder="Enter Video Id" />
+      </mat-form-field>
+    </div>
+    <div class="title-section">
+      <hr />
       <label>Property Information</label>
     </div>
     <div class="section-item">
