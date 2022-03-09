@@ -1,0 +1,110 @@
+<div class="content">
+   <div class="top-section">
+       <div class="bredcrum">
+           <a href="javascript:;" routerLink="/dashboard">Home</a>
+           <span>/</span>
+           <a href="javascript:;" routerLink="/user">Agent</a>
+           <span>/</span>
+           <span>Create</span>
+       </div>
+   </div>
+   <div class="header">
+       <div class="title">Add New Agent</div>
+       <button mat-raised-button class="success"><span class="iconify" data-icon="carbon:add-alt"></span> Create</button>
+   </div>
+      <div class="form-section">
+          <div class="section-item">
+               <mat-form-field appearance="outline" class="item">
+                     <mat-label>Agent Name</mat-label>
+                     <input matInput placeholder="First Name">
+               </mat-form-field>
+               <mat-form-field appearance="outline" class="item">
+                     <mat-label>Agent Location</mat-label>
+                     <input matInput placeholder="Last Name">
+               </mat-form-field>
+         </div>
+         <div class="title-section">
+            <hr/>
+            <label>Discussion</label>
+         </div>
+         <div class="section-item">
+            <mat-checkbox class="example-margin">Allow comments</mat-checkbox>
+         </div>
+         <div class="section-item">
+            <mat-checkbox class="example-margin">Allow trackbacks and pingbacks on this page</mat-checkbox>
+         </div>
+         <div class="title-section">
+            <hr/>
+            <label>Details</label>
+         </div>
+         <div class="section-item">
+            <mat-form-field appearance="outline" class="item">
+                  <mat-label>Agency</mat-label>
+                  <input matInput placeholder="Enter the egency name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                  <mat-label>Specialities</mat-label>
+                  <input matInput placeholder="Enter specialities">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+               <mat-label>Email</mat-label>
+               <input matInput placeholder="Enter email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                  <mat-label>Phone</mat-label>
+                  <input matInput placeholder="Enter phone">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+               <mat-label>Mobile</mat-label>
+               <input matInput placeholder="Enter mobile">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                  <mat-label>Skype</mat-label>
+                  <input matInput placeholder="Enter Skype ID">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+               <mat-label>Facebook</mat-label>
+               <input matInput placeholder="Enter Facebook profile URL">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+                  <mat-label>Twitter</mat-label>
+                  <input matInput placeholder="Enter Twitter profile URL">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+               <mat-label>Google+</mat-label>
+               <input matInput placeholder="Enter Google+ profile URL">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="item">
+               <mat-label>LinkedIn</mat-label>
+               <input matInput placeholder="Enter LinkedIn profile URL">
+            </mat-form-field>
+      </div>
+      <div class="title-section">
+         <hr/>
+         <label>Avatar</label>
+      </div>
+        <div class="section-item">
+           <div class="form-control item">
+               <mat-label>Profile Picture</mat-label>&nbsp;
+               <input type="file" placeholder="Picture">
+           </div>
+       </div>
+       <div class="title-section">
+         <hr/>
+         <label>User</label>
+      </div>
+      <div class="section-item">
+         <mat-form-field appearance="outline" class="item">
+            <mat-label>Assign a User</mat-label>
+            <mat-select>
+                <mat-option value="Super Admin">admin</mat-option>
+                <mat-option value="Country Admin">Country Admin</mat-option>
+                <mat-option value="Data Admin">Data Admin</mat-option>
+                <mat-option value="Data Manager">Data Manager</mat-option>
+                <mat-option value="Data Team Lead">Data Team Lead</mat-option>
+                <mat-option value="Data Agent">Data Agent</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+   </div>
+</div>
