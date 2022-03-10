@@ -83,13 +83,52 @@
         </mat-tab>
         <mat-tab label="Configuration">
           <div class="section-item oneline" *ngIf="isAdding">
-            <mat-label>Conifg Image</mat-label>
-            <input type="file" />
-            <mat-form-field appearance="outline" class="item">
-              <mat-label>Config Title</mat-label>
-              <input matInput placeholder="Enter Config Title" />
-            </mat-form-field>
+            <table class="config-tble">
+              <tr>
+                <td><mat-label class="p-p">Conifg Image</mat-label></td>
+                <td>  
+                    <div class="section-item">
+                            <div class="form-control item">
+                              <mat-label>Profile Picture</mat-label>&nbsp;
+                              <input type="file" placeholder="Picture">
+                        </div>
+                    </div>
+                </td>
+                <td class="b-bottom"><button mat-mini-fab class="r-btn pos" color="accent" aria-label="Example icon button with a plus one icon">
+                  <mat-icon class="r-icon ">add</mat-icon>
+                </button></td>
+              </tr>
+              <tr>
+                <td><mat-label class="p-p">Conifg Title</mat-label></td>
+                <td>  <mat-form-field appearance="outline" class="item">
+                  <mat-label>Config Title</mat-label>
+                  <input matInput placeholder="Enter Config Title" />
+                </mat-form-field></td>
+                <td class="b-bottom"></td>
+              </tr>
+              <tr>
+                <td><mat-label class="p-p">Conifg Description</mat-label></td>
+                <td>  
+                  <input type="file" placeholder="Picture"> <br>
+                  <mat-form-field appearance="outline" class="item">
+                  <mat-label>Description</mat-label>
+                  <textarea
+                    matInput
+                    formControlName="description"
+                    (change)="onFieldChange()"
+                    placeholder="Description"
+                  ></textarea>
+                </mat-form-field></td>
+                <td class="b-bottom"><button mat-mini-fab class="r-btn" color="gray" aria-label="Example icon button with a plus one icon">
+                  <mat-icon class="r-icon">remove</mat-icon>
+                </button></td>
+              </tr>
+            </table>
+            
+            
+          
           </div>
+         
           <div>
             <button (click)="onClickAddRowConfig()">Add Row</button>
           </div>

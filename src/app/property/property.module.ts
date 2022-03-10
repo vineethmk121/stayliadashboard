@@ -10,7 +10,7 @@ import { ViewComponent } from './view/view.component';
 import { GlobalModule } from '../global/global.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientJsonpModule } from '@angular/common/http';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     ListComponent,
@@ -25,6 +25,7 @@ import { HttpClientJsonpModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientJsonpModule,
     GoogleMapsModule,
+    MatGridListModule
   ],
 })
 export class PropertyModule {}
