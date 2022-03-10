@@ -4,6 +4,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'property-create',
   templateUrl: './create.component.html',
@@ -48,7 +50,7 @@ export class CreateComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
+    // uploadUrl: 'v1/image',
     // upload: (file: File) => { ... }
     // uploadWithCredentials: false,
     // sanitize: true,
@@ -64,7 +66,11 @@ export class CreateComponent implements OnInit {
     { name: 'Lime', value: 'lime' },
   ];
   apiLoaded: Observable<boolean>;
-  constructor(private fb: FormBuilder, httpClient: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    httpClient: HttpClient,
+    public dialog: MatDialog
+  ) {
     this.apiLoaded = httpClient
       .jsonp(
         'https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE',
