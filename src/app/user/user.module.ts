@@ -24,6 +24,7 @@ import { CreateAgentComponent } from './create-agent/create-agent.component';
     CommonModule,
     UserRoutingModule,
     GlobalModule
+  
   ]
 })
 export class UserModule { }
