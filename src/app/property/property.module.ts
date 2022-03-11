@@ -8,9 +8,8 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { ViewComponent } from './view/view.component';
 import { GlobalModule } from '../global/global.module';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientJsonpModule } from '@angular/common/http';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     ListComponent,
@@ -24,8 +23,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     GlobalModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
-    GoogleMapsModule,
-    MatGridListModule
+    MatGridListModule,
   ],
 })
 export class PropertyModule {}

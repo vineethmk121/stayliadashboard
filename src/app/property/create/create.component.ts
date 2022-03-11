@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
+import { Loader } from '@googlemaps/js-api-loader';
 
 @Component({
   selector: 'property-create',
@@ -13,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CreateComponent implements OnInit {
   propertyForm: any;
-
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -65,33 +62,127 @@ export class CreateComponent implements OnInit {
     { name: 'Apple', value: 'apple' },
     { name: 'Lime', value: 'lime' },
   ];
-  apiLoaded: Observable<boolean>;
-  constructor(
-    private fb: FormBuilder,
-    httpClient: HttpClient,
-    public dialog: MatDialog
-  ) {
-    this.apiLoaded = httpClient
-      .jsonp(
-        'https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE',
-        'callback'
-      )
-      .pipe(
-        map(() => true),
-        catchError(() => of(false))
-      );
-  }
+  ConfigForm: any;
+  SideBar!: FormGroup;
+
+  constructor(private fb: FormBuilder, httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.propertyForm = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
     });
+    this.ConfigForm = this.fb.group({
+      Configuration: this.fb.array([this.addConfigGroup()]),
+      details: this.fb.array([this.addSideBarControl()]),
+      longitude: [null],
+      latitude: [null],
+      city: [null],
+    });
+
+    let loader = new Loader({
+      apiKey: 'AIzaSyC4jbXYiXRoJaH7FweGyLRsqW_U3rIbT90&libraries=places',
+    });
+    loader.load().then(() => {
+      let map = new google.maps.Map(
+        document.getElementById('map') as HTMLElement,
+        {
+          center: { lat: 32.16515, lng: 74.184505 },
+          zoom: 12,
+        }
+      );
+      this.autoCompletePlace();
+      const marker = new google.maps.Marker({
+        position: { lat: 32.16515, lng: 74.184505 },
+        map: map,
+        draggable: true,
+      });
+      google.maps.event.addListener(marker, 'dragend', (evt: any) => {
+        let lat = evt.latLng.lat().toFixed(6);
+        let lng = evt.latLng.lng().toFixed(6);
+        console.log(lat, lng);
+        map.panTo(evt.latLng);
+        this.ConfigForm.patchValue({
+          longitude: lng,
+          latitude: lat,
+        });
+      });
+    });
+  }
+
+  autoCompletePlace() {
+    const center = { lat: 32.16515, lng: 74.184505 };
+    const defaultBounds = {
+      north: center.lat + 0.1,
+      south: center.lat - 0.1,
+      east: center.lng + 0.1,
+      west: center.lng - 0.1,
+    };
+    const input = document.getElementById('pac-input') as HTMLInputElement;
+    const options = {
+      bounds: defaultBounds,
+      componentRestrictions: { country: 'pk' },
+      fields: ['address_components', 'geometry', 'icon', 'name'],
+      strictBounds: false,
+      types: ['establishment'],
+    };
+
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        alert('No details available for input:' + input.value);
+        return;
+      } else {
+        console.log('Place', place);
+        let lat = place.geometry?.location?.lat();
+        let lng = place.geometry?.location?.lng();
+        this.ConfigForm.patchValue({
+          longitude: lng,
+          latitude: lat,
+        });
+        return;
+      }
+    });
+  }
+  addSideBarControl() {
+    return this.fb.group({
+      detail: [null],
+    });
+  }
+  onClickAddRowSidebar() {
+    this.DetailsArray.push(this.addSideBarControl());
+    console.log(this.SideBar.value);
+  }
+  onClickRemoveSidebar(index: number) {
+    this.DetailsArray.removeAt(index);
+  }
+
+  addConfigGroup() {
+    return this.fb.group({
+      configImage: [null],
+      configTitle: [null],
+      configDescription: [null],
+      configDEsImg: [null],
+    });
   }
   onClickAddRowConfig() {
-    this.isAdding = true;
+    this.ConfigArray.push(this.addConfigGroup());
+    console.log(this.ConfigForm.value);
+  }
+  onClickRemoveConfig(index: number) {
+    this.ConfigArray.removeAt(index);
   }
   onFieldChange() {
     console.log(this.propertyForm.value);
+  }
+
+  get ConfigArray() {
+    return <FormArray>this.ConfigForm.get('Configuration');
+  }
+  get DetailsArray() {
+    return <FormArray>this.ConfigForm.get('details');
   }
 }
