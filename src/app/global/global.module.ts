@@ -42,6 +42,7 @@ import { FooterComponent } from './footer/footer.component';
     AngularEditorModule,
     HttpClientModule,
     MatCheckboxModule,
+    HttpClientModule
   ],
   exports: [
     HeaderComponent,
@@ -62,6 +63,7 @@ import { FooterComponent } from './footer/footer.component';
     AngularEditorModule,
     HttpClientModule,
     MatCheckboxModule,
+    HttpClientModule
   ],
 })
 export class GlobalModule {}

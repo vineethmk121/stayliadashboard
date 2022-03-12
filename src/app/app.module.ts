@@ -8,6 +8,8 @@ import { AuthenticatedComponent } from './layout/authenticated/authenticated.com
 import { UnauthenticatedComponent } from './layout/unauthenticated/unauthenticated.component';
 import { GlobalModule } from './global/global.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -24,7 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GlobalModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
