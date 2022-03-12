@@ -1,0 +1,29 @@
+<div class="auth-form">
+    <img class="brand-logo" src="assets/images/logo.png" alt="logo">
+    <form [formGroup]="formGroup" (submit)="login()">
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" placeholder="Email">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" placeholder="Password">
+                <span class="iconify" matSuffix data-icon="el:eye-close"></span>
+            </mat-form-field>
+        </div>
+        <button class="btn">Signin</button>
+        <!-- <div>
+            <div>
+                <label>
+                    <input type="checkbox" name="keepMeSignIn">
+                    <i class="input-helper"></i>
+                    Keep me signed in
+                </label>
+            </div>
+            <span>Forgot password?</span>
+        </div> -->
+    </form>
+</div>
