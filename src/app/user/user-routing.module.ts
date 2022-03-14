@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'',component:ListComponent,pathMatch:'full'},
   {path:'create',component:CreateComponent},
   {path:'update',component:UpdateComponent},
-  {path:'view',component:ViewComponent},
+  {path:'view/:id',component:ViewComponent},
   {path:'create-agent',component:CreateAgentComponent}
 ];
 

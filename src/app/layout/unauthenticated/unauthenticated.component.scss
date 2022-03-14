@@ -1,0 +1,21 @@
+@import '../../../scss/variables';
+.layout-wrapper{
+    display: flex;
+    .layout-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        overflow-y: auto;
+        .main{
+            border-radius: 10px;
+            z-index: 1;
+            background-color: #fff;
+            margin-top: 80px;
+            width: 30rem;
+            box-shadow: 0 -5px 10px rgb(15 34 58 / 20%);
+            padding: 20px;
+        }
+    }
+}

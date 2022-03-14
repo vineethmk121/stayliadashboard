@@ -31,7 +31,7 @@
             <tr>
                 <th>FName</th>
                 <th>LName</th>
-                <th>DOB</th>
+                <th>Country</th>
                 <th>User Type</th>
                 <th>Mobile</th>
                 <th>Gender</th>
@@ -39,28 +39,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Raj</td>
-                <td>Kesavr</td>
-                <td>12/6/2021</td>
-                <td>Admin</td>
-                <td>07373855998</td>
-                <td>Male</td>
+            <tr *ngFor="let user of users">
+                <td>{{user.fName}}</td>
+                <td>{{user.lName}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.userType}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.gender}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="success action-button" routerLink="view"><span class="iconify" data-icon="entypo:eye"></span></button>
-                    <button mat-mini-fab class="info action-button" routerLink="update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Prem</td>
-                <td>kumar</td>
-                <td>12/6/1995</td>
-                <td>Country Admin</td>
-                <td>69587213598</td>
-                <td>male</td>
-                <td class="action">
-                    <button mat-mini-fab class="success action-button" routerLink="view"><span class="iconify" data-icon="entypo:eye"></span></button>
+                    <button mat-mini-fab class="success action-button" [routerLink]="['view',user._id]"><span class="iconify" data-icon="entypo:eye"></span></button>
                     <button mat-mini-fab class="info action-button" routerLink="update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
                     <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
