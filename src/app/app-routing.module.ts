@@ -6,21 +6,27 @@ import { UnauthenticatedComponent } from './layout/unauthenticated/unauthenticat
 
 const routes: Routes = [
   {
-    path:'',
-    loadChildren:()=>import('./layout/authenticated/authenticated.module').then(m=>m.AuthenticatedModule),
-    component:AuthenticatedComponent,
-    canActivate:[AuthGuard]
+    path: '',
+    loadChildren: () =>
+      import('./layout/authenticated/authenticated.module').then(
+        (m) => m.AuthenticatedModule
+      ),
+    component: AuthenticatedComponent,
+    // canActivate:[AuthGuard]
   },
   {
-    path:'',
-    loadChildren:()=>import('./layout/unauthenticated/unauthenticated.module').then(m=>m.UnauthenticatedModule),
-    component:UnauthenticatedComponent
+    path: '',
+    loadChildren: () =>
+      import('./layout/unauthenticated/unauthenticated.module').then(
+        (m) => m.UnauthenticatedModule
+      ),
+    component: UnauthenticatedComponent,
   },
-  {path:'',redirectTo:'/dashboard',pathMatch:'full'}
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

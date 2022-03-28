@@ -1,85 +1,226 @@
 <div class="content">
-    <div class="top-section">
-        <div class="bredcrum">
-            <a href="javascript:;" routerLink="/dashboard">Home</a>
-            <span>/</span>
-            <span>Properties</span>
-        </div>
-        <button mat-raised-button class="success add-user" routerLink="create"><span class="iconify" data-icon="carbon:add-alt"></span> Add New Property</button>
+  <div class="top-section">
+    <div class="bredcrum">
+      <a href="javascript:;" routerLink="/dashboard">Home</a>
+      <span>/</span>
+      <span>Properties</span>
     </div>
-    <div class="header">
-        <div class="title">Properties</div>
-        <div class="right-section">
-            <div class="input-group search">
-                <input class="form-control" placeholder="Search" type="text">
-                <div class="input-group-append">
-                    <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
-                </div>
-            </div>
+    <button mat-raised-button class="success add-user" routerLink="create">
+      <span class="iconify" data-icon="carbon:add-alt"></span> Add New Property
+    </button>
+  </div>
+  <div class="header">
+    <div class="title">Properties</div>
+    <form [formGroup]="filterForm">
+      <mat-form-field appearance="outline" class="item m-width">
+        <mat-label>Filters</mat-label>
+        <mat-select
+          formControlName="mainFilter"
+          (selectionChange)="onChangeMainFilter()"
+        >
+          <mat-option value="realestate">Real Estate</mat-option>
+          <mat-option value="land">Land</mat-option>
+          <mat-option value="commercial">Commercial</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <div class="right-section">
+      <div class="input-group search">
+        <input class="form-control" placeholder="Search" type="text" />
+        <div class="input-group-append">
+          <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
         </div>
+      </div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Tag</th>
-                <th>Property Types</th>
-                <th>SellingPrice</th>
-                <th>Country</th>
-                <th>Agent</th>
-                <th class="action">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>JP Signature Park</td>
-                <td>PLOT/LAND</td>
-                <td>Plot</td>
-                <td>15,00,000.00</td>
-                <td>India</td>
-                <td>Raj/ Niran</td>
-                <td class="action">
-                    <button mat-mini-fab class="success action-button" routerLink="view"><span class="iconify" data-icon="entypo:eye"></span></button>
-                    <button mat-mini-fab class="info action-button" routerLink="update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Milano Builders & Promotors</td>
-                <td>LUXURY VILLA</td>
-                <td>Villa</td>
-                <td>15,00,000.00</td>
-                <td>USA</td>
-                <td>Raj/ Niran</td>
-                <td class="action">
-                    <button mat-mini-fab class="success action-button" routerLink="view"><span class="iconify" data-icon="entypo:eye"></span></button>
-                    <button mat-mini-fab class="info action-button" routerLink="update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-left"></span></a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="javascript:;">1</a>
-        </li>
-        <li class="page-item active">
-            <a class="page-link" href="javascript:;">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="javascript:;">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="javascript:;">4</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="javascript:;">5</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-right"></span></a>
-        </li>
-    </ul>
+  </div>
+  <!-- Filters Section -->
+  <div>
+    <form>
+      <div class="d-flex">
+        <div style="margin-left: 15px">
+          <label>Price Range</label>
+          <mat-slider
+            class="sliders"
+            style="margin-left: 15px"
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            step="1000"
+            min="0"
+            max="100000"
+            aria-label="units"
+          ></mat-slider>
+        </div>
+        <div style="margin-left: 15px">
+          <label>Area Range</label>
+          <mat-slider
+            class="sliders"
+            style="margin-left: 15px"
+            thumbLabel
+            [displayWith]="areaformatLabel"
+            tickInterval="1000"
+            step="1000"
+            min="0"
+            max="100000"
+            aria-label="units"
+          ></mat-slider>
+        </div>
+      </div>
+      <div class="d-flex">
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item m-width"
+        >
+          <mat-label>Amenities</mat-label>
+          <mat-select
+            formControlName="mainFilter"
+            (selectionChange)="onChangeMainFilter()"
+          >
+            <mat-option value="realestate">Amenities 1</mat-option>
+            <mat-option value="land">Amenities 2</mat-option>
+            <mat-option value="commercial">Amenities 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item"
+        >
+          <mat-label>Bedrooms</mat-label>
+          <input matInput type="number" placeholder="Bedrooms" />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item m-width"
+        >
+          <mat-label>Furnishing Status</mat-label>
+          <mat-select>
+            <mat-option value="realestate">Furnished</mat-option>
+            <mat-option value="land">Semi Furnished</mat-option>
+            <mat-option value="commercial">Unfurnished</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item m-width"
+        >
+          <mat-label>Land Status</mat-label>
+          <mat-select>
+            <mat-option value="farm">Farm Land</mat-option>
+            <mat-option value="commercial">Commercial</mat-option>
+            <mat-option value="residential">Residential</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item m-width"
+        >
+          <mat-label>Construction status</mat-label>
+          <mat-select>
+            <mat-option value="farm">Under construction</mat-option>
+            <mat-option value="commercial">Ready to Move</mat-option>
+            <mat-option value="residential">Residential</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="margin-left: 20px"
+          class="item m-width"
+        >
+          <mat-label>Posted by</mat-label>
+          <mat-select>
+            <mat-option value="Owner">Owner</mat-option>
+            <mat-option value="Builder">Builder</mat-option>
+            <mat-option value="Agents">Agents</mat-option>
+            <mat-option value="Agency">Agency</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Tag</th>
+        <th>Property Types</th>
+        <th>SellingPrice</th>
+        <th>Country</th>
+        <th>Agent</th>
+        <th class="action">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>JP Signature Park</td>
+        <td>PLOT/LAND</td>
+        <td>Plot</td>
+        <td>15,00,000.00</td>
+        <td>India</td>
+        <td>Raj/ Niran</td>
+        <td class="action">
+          <button mat-mini-fab class="success action-button" routerLink="view">
+            <span class="iconify" data-icon="entypo:eye"></span>
+          </button>
+          <button mat-mini-fab class="info action-button" routerLink="update">
+            <span class="iconify" data-icon="bx:bxs-edit"></span>
+          </button>
+          <button mat-mini-fab class="danger action-button">
+            <span class="iconify" data-icon="ant-design:delete-filled"></span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>Milano Builders & Promotors</td>
+        <td>LUXURY VILLA</td>
+        <td>Villa</td>
+        <td>15,00,000.00</td>
+        <td>USA</td>
+        <td>Raj/ Niran</td>
+        <td class="action">
+          <button mat-mini-fab class="success action-button" routerLink="view">
+            <span class="iconify" data-icon="entypo:eye"></span>
+          </button>
+          <button mat-mini-fab class="info action-button" routerLink="update">
+            <span class="iconify" data-icon="bx:bxs-edit"></span>
+          </button>
+          <button mat-mini-fab class="danger action-button">
+            <span class="iconify" data-icon="ant-design:delete-filled"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="javascript:;"
+        ><span class="iconify" data-icon="uim:angle-left"></span
+      ></a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:;">1</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="javascript:;">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:;">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:;">4</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:;">5</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:;"
+        ><span class="iconify" data-icon="uim:angle-right"></span
+      ></a>
+    </li>
+  </ul>
 </div>

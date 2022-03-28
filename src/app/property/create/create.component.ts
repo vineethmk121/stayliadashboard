@@ -11,6 +11,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 })
 export class CreateComponent implements OnInit {
   propertyForm: any;
+  center = { lat: 32.16515, lng: 74.184505 };
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -64,6 +65,7 @@ export class CreateComponent implements OnInit {
   ];
   ConfigForm: any;
   SideBar!: FormGroup;
+  map!: google.maps.Map;
 
   constructor(private fb: FormBuilder, httpClient: HttpClient) {}
 
@@ -84,24 +86,24 @@ export class CreateComponent implements OnInit {
       apiKey: 'AIzaSyC4jbXYiXRoJaH7FweGyLRsqW_U3rIbT90&libraries=places',
     });
     loader.load().then(() => {
-      let map = new google.maps.Map(
+      this.map = new google.maps.Map(
         document.getElementById('map') as HTMLElement,
         {
           center: { lat: 32.16515, lng: 74.184505 },
           zoom: 12,
         }
       );
-      this.autoCompletePlace();
       const marker = new google.maps.Marker({
-        position: { lat: 32.16515, lng: 74.184505 },
-        map: map,
+        position: this.center,
+        map: this.map,
         draggable: true,
       });
+      this.autoCompletePlace(marker);
       google.maps.event.addListener(marker, 'dragend', (evt: any) => {
         let lat = evt.latLng.lat().toFixed(6);
         let lng = evt.latLng.lng().toFixed(6);
         console.log(lat, lng);
-        map.panTo(evt.latLng);
+        this.map.panTo(evt.latLng);
         this.ConfigForm.patchValue({
           longitude: lng,
           latitude: lat,
@@ -110,7 +112,7 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  autoCompletePlace() {
+  autoCompletePlace(marker: google.maps.Marker) {
     const center = { lat: 32.16515, lng: 74.184505 };
     const defaultBounds = {
       north: center.lat + 0.1,
@@ -137,8 +139,13 @@ export class CreateComponent implements OnInit {
         return;
       } else {
         console.log('Place', place);
-        let lat = place.geometry?.location?.lat();
-        let lng = place.geometry?.location?.lng();
+        let lat = place.geometry?.location?.lat() || 0;
+        let lng = place.geometry?.location?.lng() || 0;
+        this.center = { lat: lat, lng: lng };
+
+        const LatLng = new google.maps.LatLng(lat, lng);
+        marker.setPosition(LatLng);
+        this.map.panTo(LatLng);
         this.ConfigForm.patchValue({
           longitude: lng,
           latitude: lat,
