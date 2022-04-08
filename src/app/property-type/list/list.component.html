@@ -27,22 +27,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Plot</td>
-                <td>Plot</td>
+            <tr *ngFor="let pro of proType">
+                <td>{{pro.title}}</td>
+                <td>{{pro.filter}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(pro)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deletePtype(pro._id)"><span class="iconify" data-icon="ant-design:delete-filled"  ></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>Villa</td>
-                <td>Villa,Town house</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
+           
         </tbody>
     </table>
     <ul class="pagination">

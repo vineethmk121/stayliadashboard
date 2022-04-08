@@ -26,27 +26,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Studio</td>
+            <tr *ngFor="let br of bedRoom">
+                <td>{{br.title}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(br)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deleteBed(br._id)" ><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>1 BHK</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>2 BHK</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
+           
         </tbody>
     </table>
     <ul class="pagination">

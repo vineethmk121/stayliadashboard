@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,6 +7,7 @@ import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { GlobalModule } from '../global/global.module';
   imports: [
     CommonModule,
     BedroomTypeRoutingModule,
-    GlobalModule
+    GlobalModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class BedroomTypeModule { }

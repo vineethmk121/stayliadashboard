@@ -27,30 +27,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Listed</td>
-                <td>Listed on date</td>
+            <tr *ngFor="let add_info of info">
+                <td>{{add_info.title}}</td>
+                <td>{{add_info.description}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(add_info)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deleteInfo(add_info._id)" ><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>Property code</td>
-                <td>Propery code</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>RERA ID</td>
-                <td>The area location info</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
+           
         </tbody>
     </table>
     <ul class="pagination">

@@ -23,32 +23,21 @@
            <tr>
                <th>Name</th>
                <th>Description</th>
-               <th>Slug</th>
-               <th>Count</th>
+               
                <th class="action">Action</th>
            </tr>
        </thead>
        <tbody>
-           <tr>
-               <td>Plot</td>
-               <td>Plot</td>
-               <td>Slug</td>
-               <td>1</td>
+           <tr *ngFor="let proCat of propertyCat ">
+               <td>{{proCat.title}}</td>
+               <td>{{proCat.filter}}</td>
+           
                <td class="action">
-                   <button mat-mini-fab class="info action-button"(click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                   <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                   <button mat-mini-fab class="info action-button"(click)="openUpdateDialog(proCat)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                   <button mat-mini-fab class="danger action-button" (click)="deleteCat(proCat._id)"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                </td>
            </tr>
-           <tr>
-               <td>Villa</td>
-               <td>Villa,Town house</td>
-               <td>Slug2</td>
-               <td>2</td>
-               <td class="action">
-                   <button mat-mini-fab class="info action-button"(click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                   <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-               </td>
-           </tr>
+           
        </tbody>
    </table>
    <ul class="pagination">

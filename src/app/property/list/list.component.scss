@@ -1,1 +1,12 @@
-@import '../../../scss/action-button';
+@import "../../../scss/action-button";
+.m-width {
+  width: 300px;
+}
+
+.sliders {
+  min-width: 253px !important;
+}
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}

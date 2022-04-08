@@ -27,22 +27,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>LUXURY VILLA</td>
-                <td>FOR SALE</td>
+            <tr *ngFor="let tag of tags">
+                <td>{{tag.title}}</td>
+                <td>{{tag.description}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(tag)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deleteTags(tag._id)" ><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>PLOT/LAND</td>
-                <td>FOR SALE</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
+         
         </tbody>
     </table>
     <ul class="pagination">

@@ -9,6 +9,7 @@ import { UserService } from '../user.service';
 })
 export class ViewComponent implements OnInit {
   user:any;
+ 
   constructor(private _userService:UserService,private _route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -16,7 +17,7 @@ export class ViewComponent implements OnInit {
     if(id){
       this._userService.getUserDetail(id).subscribe(res=>{
         this.user = res.data;
-        console.log(res);
+        console.log(res.data);
       })
     }
   }

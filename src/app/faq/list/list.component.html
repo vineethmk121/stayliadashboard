@@ -27,12 +27,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Test</td>
-                <td>Demo</td>
+            <tr *ngFor="let faqs of Faq">
+                <td>{{faqs.title}}</td>
+                <td>{{faqs.description}}</td>
                 <td class="action">
                     <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deleteFAQ(faqs._id)"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
         </tbody>

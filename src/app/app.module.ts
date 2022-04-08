@@ -10,6 +10,7 @@ import { GlobalModule } from './global/global.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -18,13 +19,15 @@ import { AuthInterceptor } from './auth.interceptor';
     NotFoundComponent,
     AuthenticatedComponent,
     UnauthenticatedComponent,
+    LoadingComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GlobalModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+   
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

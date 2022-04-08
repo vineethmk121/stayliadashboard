@@ -10,19 +10,19 @@
   </div>
   <div class="header">
     <div class="title">Add New Property</div>
-    <button mat-raised-button class="success">
+    <button mat-raised-button class="success" (click)="onSubmit()">
       <span class="iconify" data-icon="carbon:add-alt"></span> Create
     </button>
   </div>
   <div class="form-section">
-    <form [formGroup]="propertyForm">
+    <form [formGroup]="ConfigForm">
       <div class="section-item oneline">
         <mat-form-field appearance="outline" class="item">
           <mat-label>Title</mat-label>
           <input
             formControlName="title"
             matInput
-            (change)="onFieldChange()"
+            
             placeholder="Title"
           />
         </mat-form-field>
@@ -31,7 +31,7 @@
           <textarea
             matInput
             formControlName="description"
-            (change)="onFieldChange()"
+         
             placeholder="Description"
           ></textarea>
         </mat-form-field>
@@ -61,79 +61,177 @@
           </div>
         </mat-tab>
         <mat-tab label="Overview">
-          <div class="section-item oneline">
-            <mat-form-field appearance="outline" class="item">
-              <mat-label>Status</mat-label>
-              <input matInput placeholder="Status" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-              <mat-label>Total area</mat-label>
-              <input matInput placeholder="Total Area" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-              <mat-label>Total Launched apartments</mat-label>
-              <input matInput placeholder="Total Launched apartments" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="item">
-              <mat-label> Availability</mat-label>
-              <input matInput placeholder="Total Launched apartments" />
-            </mat-form-field>
-            <angular-editor [config]="editorConfig"></angular-editor>
-          </div>
+          <form [formGroup]="ConfigForm">
+            <div class="section-item oneline">
+              <mat-form-field appearance="outline" class="item">
+                <mat-label>Status</mat-label>
+                <input matInput placeholder="Status" formControlName="status" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="item">
+                <mat-label>Total area</mat-label>
+                <input
+                  matInput
+                  placeholder="Total Area"
+                  formControlName="totalArea"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="item">
+                <mat-label>Total Launched apartments</mat-label>
+                <input
+                  matInput
+                  placeholder="Total Launched apartments"
+                  formControlName="totalLaunchedApparments"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="item">
+                <mat-label> Availability</mat-label>
+                <input
+                  matInput
+                  formControlName="availability"
+                  placeholder="Total Launched apartments"
+                />
+              </mat-form-field>
+              <angular-editor
+                formControlName="editor"
+                [config]="editorConfig"
+              ></angular-editor>
+            </div>
+          </form>
         </mat-tab>
         <mat-tab label="Configuration">
-          <div class="section-item oneline" *ngIf="isAdding">
-            <table class="config-tble">
-              <tr>
-                <td><mat-label class="p-p">Conifg Image</mat-label></td>
-                <td>  
-                    <div class="section-item">
-                            <div class="form-control item">
-                              <mat-label>Profile Picture</mat-label>&nbsp;
-                              <input type="file" placeholder="Picture">
+          <div class="section-item oneline">
+            <form [formGroup]="ConfigForm">
+              <table class="config-tble" formArrayName="Configuration">
+                <div
+                  style="margin-top: 10px"
+                  *ngFor="let group of ConfigArray.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <tr>
+                    <td><mat-label class="p-p">Config Image</mat-label></td>
+                    <td>
+                      <div class="section-item">
+                        <div class="form-control item">
+                          <!-- <mat-label>Profile Picture</mat-label>&nbsp; -->
+                          <input
+                            #configImage
+                            id="configImage"
+                            type="file"
+                            placeholder="Picture"
+                            (change)="getIndex(i, configImage, $event)"
+                          />
                         </div>
-                    </div>
-                </td>
-                <td class="b-bottom"><button mat-mini-fab class="r-btn pos" color="accent" aria-label="Example icon button with a plus one icon">
-                  <mat-icon class="r-icon ">add</mat-icon>
-                </button></td>
-              </tr>
-              <tr>
-                <td><mat-label class="p-p">Conifg Title</mat-label></td>
-                <td>  <mat-form-field appearance="outline" class="item">
-                  <mat-label>Config Title</mat-label>
-                  <input matInput placeholder="Enter Config Title" />
-                </mat-form-field></td>
-                <td class="b-bottom"></td>
-              </tr>
-              <tr>
-                <td><mat-label class="p-p">Conifg Description</mat-label></td>
-                <td>  
-                  <input type="file" placeholder="Picture"> <br>
-                  <mat-form-field appearance="outline" class="item">
-                  <mat-label>Description</mat-label>
-                  <textarea
-                    matInput
-                    formControlName="description"
-                    (change)="onFieldChange()"
-                    placeholder="Description"
-                  ></textarea>
-                </mat-form-field></td>
-                <td class="b-bottom"><button mat-mini-fab class="r-btn" color="gray" aria-label="Example icon button with a plus one icon">
-                  <mat-icon class="r-icon">remove</mat-icon>
-                </button></td>
-              </tr>
-            </table>
-            
-            
-          
+                      </div>
+                    </td>
+                    <td class="b-bottom">
+                      <button
+                        mat-mini-fab
+                        class="r-btn pos"
+                        color="accent"
+                        (click)="onClickAddRowConfig()"
+                        aria-label="Example icon button with a plus one icon"
+                      >
+                        <mat-icon class="r-icon">add</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><mat-label class="p-p">Conifg Title</mat-label></td>
+                    <td>
+                      <mat-form-field appearance="outline" class="item">
+                        <mat-label>Config Title</mat-label>
+                        <input
+                          matInput
+                          formControlName="configTitle"
+                          placeholder="Enter Config Title"
+                        />
+                      </mat-form-field>
+                    </td>
+                    <td class="b-bottom"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <mat-label class="p-p">Conifg Description</mat-label>
+                    </td>
+                    <td>
+                      <input
+                        type="file"
+                        placeholder="Picture"
+                        #configDesImg
+                        id="configDesImg"
+                        (change)="getIndex(i, configDesImg, $event)"
+                      />
+                      <br />
+                      <mat-form-field appearance="outline" class="item">
+                        <mat-label>Description</mat-label>
+                        <textarea
+                          matInput
+                          formControlName="configDescription"
+                          placeholder="Description"
+                        ></textarea>
+                      </mat-form-field>
+                    </td>
+                    <td class="b-bottom">
+                      <button
+                        mat-mini-fab
+                        class="r-btn"
+                        (click)="onClickRemoveConfig(i)"
+                        color="gray"
+                        aria-label="Example icon button with a plus one icon"
+                      >
+                        <mat-icon class="r-icon">remove</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </div>
+              </table>
+            </form>
           </div>
-         
+
           <div>
             <button (click)="onClickAddRowConfig()">Add Row</button>
           </div>
         </mat-tab>
-        <mat-tab label="Sidebar">SideBar</mat-tab>
+        <mat-tab label="Sidebar">
+          <div class="section-item oneline">
+            <form [formGroup]="ConfigForm">
+              <div class="sidebarMain" formArrayName="details">
+                <div
+                  *ngFor="let control of DetailsArray.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div>
+                    <mat-form-field appearance="outline" class="item">
+                      <mat-label>Detail</mat-label>
+                      <input matInput formControlName="detail" type="text" />
+                    </mat-form-field>
+                    <button
+                      mat-mini-fab
+                      color="accent"
+                      class="r-btn btn-space"
+                      (click)="onClickAddRowSidebar()"
+                      aria-label="Example icon button with a plus one icon"
+                    >
+                      <mat-icon class="r-icon">add</mat-icon>
+                    </button>
+                    <button
+                      mat-mini-fab
+                      class="r-btn btn-space"
+                      color="gray"
+                      (click)="onClickRemoveSidebar(i)"
+                      aria-label="Example icon button with a plus one icon"
+                    >
+                      <mat-icon class="r-icon">remove</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <button class="addbtn" (click)="onClickAddRowSidebar()">
+            Add row
+          </button>
+        </mat-tab>
       </mat-tab-group>
     </div>
     <!-- LOCATION -->
@@ -141,45 +239,62 @@
       <hr />
       <label>Location</label>
     </div>
-    <div *ngIf="apiLoaded | async">
-      <google-map></google-map>
-    </div>
+
     <div class="section-item">
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Address</mat-label>
-        <input matInput placeholder="Address" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>NeighbourHood</mat-label>
-        <input matInput placeholder="NeighbourHood" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>FlatNo</mat-label>
-        <input matInput placeholder="FlatNo" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Street</mat-label>
-        <input matInput placeholder="Street" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="City" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>ZipCode</mat-label>
-        <input matInput placeholder="ZipCode" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>State</mat-label>
-        <input matInput placeholder="State" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Country</mat-label>
-        <mat-select>
-          <mat-option value="USA">USA</mat-option>
-          <mat-option value="India">India</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <form [formGroup]="ConfigForm">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Latitude</mat-label>
+          <input matInput formControlName="latitude" placeholder="Latitude" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Longitude</mat-label>
+          <input matInput formControlName="longitude" placeholder="Longitude" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>City</mat-label>
+          <input matInput id="pac-input" placeholder="City" formControlName="city" />
+        </mat-form-field>
+      </form>
+
+      <div id="map" class="maps"></div>
+      <form [formGroup]="ConfigForm">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>NeighbourHood</mat-label>
+          <input
+            matInput
+            placeholder="NeighbourHood"
+            formControlName="neighbourhood"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>FlatNo</mat-label>
+          <input matInput placeholder="FlatNo" formControlName="flatNumber" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Street</mat-label>
+          <input matInput placeholder="Street" formControlName="street" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>ZipCode</mat-label>
+          <input matInput placeholder="ZipCode" formControlName="countryCode" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="State" formControlName="state" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option value="{{ con._id }}" *ngFor="let con of country">{{
+              con.title
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
     </div>
     <!-- DETAILS -->
     <div class="title-section">
@@ -188,38 +303,48 @@
       <label>Details</label>
     </div>
     <div class="section-item oneline">
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Selling Price</mat-label>
-        <input matInput placeholder="Selling Price" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Price Label(e.g."per month")</mat-label>
-        <input matInput placeholder="Label" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Discount Price</mat-label>
-        <input matInput placeholder="Discount Price" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Area(sq ft)</mat-label>
-        <input matInput placeholder="Area(sq ft)" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Bedroom</mat-label>
-        <input matInput placeholder="Bedroom" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Bathrooms</mat-label>
-        <input matInput placeholder="Bathrooms" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Deposit</mat-label>
-        <input matInput placeholder="Deposit" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Rent</mat-label>
-        <input matInput placeholder="Rent" />
-      </mat-form-field>
+      <form [formGroup]="ConfigForm">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Selling Price</mat-label>
+          <input
+            matInput
+            placeholder="Selling Price"
+            formControlName="sellingPrice"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Price Label(e.g."per month")</mat-label>
+          <input matInput placeholder="Label" formControlName="lblPrice" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Discount Price</mat-label>
+          <input
+            matInput
+            placeholder="Discount Price"
+            formControlName="discountPrice"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Area(sq ft)</mat-label>
+          <input matInput placeholder="Area(sq ft)" formControlName="area" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Bedroom</mat-label>
+          <input matInput placeholder="Bedroom" formControlName="bedroom" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Bathrooms</mat-label>
+          <input matInput placeholder="Bathrooms" formControlName="bathroom" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Deposit</mat-label>
+          <input matInput placeholder="Deposit" formControlName="deposite" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Rent</mat-label>
+          <input matInput placeholder="Rent" formControlName="rent" />
+        </mat-form-field>
+      </form>
     </div>
     <!-- ADDITIONAL INFO -->
     <div class="title-section">
@@ -227,50 +352,72 @@
       <label>Addional Information</label>
     </div>
     <div class="section-item">
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Additional Info</mat-label>
-        <input matInput placeholder="Additional Info" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Built In</mat-label>
-        <input matInput placeholder="Built In" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Parking Spaces</mat-label>
-        <input matInput placeholder="Parking Spaces" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Room Count</mat-label>
-        <input matInput placeholder="Room Count" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Unit Count</mat-label>
-        <input matInput placeholder="Unit Count" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Lot Depth</mat-label>
-        <input matInput placeholder="Lot Depth" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Lot Width</mat-label>
-        <input matInput placeholder="Lot Width" />
-      </mat-form-field>
+      <form [formGroup]="ConfigForm">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Additional Info</mat-label>
+          <input
+            matInput
+            placeholder="Additional Info"
+            formControlName="additionalInfo"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Built In</mat-label>
+          <input matInput placeholder="Built In" formControlName="buildIn" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Parking Spaces</mat-label>
+          <input
+            matInput
+            placeholder="Parking Spaces"
+            formControlName="parkingSpace"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Room Count</mat-label>
+          <input
+            matInput
+            placeholder="Room Count"
+            formControlName="roomCount"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Unit Count</mat-label>
+          <input
+            matInput
+            placeholder="Unit Count"
+            formControlName="unitCount"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Lot Depth</mat-label>
+          <input matInput placeholder="Lot Depth" formControlName="lotDepth" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Lot Width</mat-label>
+          <input matInput placeholder="Lot Width" formControlName="lotWidth" />
+        </mat-form-field>
+      </form>
     </div>
     <!-- AMENITIES -->
+    <form [formGroup]="ConfigForm">
     <div class="title-section">
       <hr />
       <label>Amenities</label>
     </div>
     <div class="section-item">
-      <div *ngFor="let amen of Amenties" class="padding:10px">
-        <mat-checkbox
+      <div *ngFor="let amen of amenities" class="padding:10px">
+        <label>
+        <input type="checkbox"
+        (change)="checkBoxvalue($event)"
           class="example-margin"
           style="margin-left: 20px"
-          [value]="amen.value"
-          >{{ amen.name }}</mat-checkbox
-        >
+          [value]="amen._id" />
+          {{ amen.title }} 
+        </label>
       </div>
     </div>
+  </form>
     <!-- FLOORSPLAN -->
     <div class="title-section">
       <hr />
@@ -288,13 +435,16 @@
       <label>Agent</label>
     </div>
     <div class="section-item">
-      <mat-form-field appearance="outline" class="item">
-        <mat-label>Select Agents</mat-label>
-        <mat-select>
-          <mat-option value="vinod">Agent Vinod</mat-option>
-          <mat-option value="Bruce">BruceLee</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <form [formGroup]="ConfigForm">
+        <mat-form-field appearance="outline" class="item">
+          <mat-label>Select Agents</mat-label>
+          <mat-select formControlName="agent">
+            <mat-option value="{{ ag._id }}" *ngFor="let ag of agentList">{{
+              ag.userType
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
     </div>
     <!-- VIDEO -->
     <div class="title-section">
@@ -320,32 +470,60 @@
       <hr />
       <label>Property Information</label>
     </div>
+    <form [formGroup]="ConfigForm">
     <div class="section-item">
       <mat-form-field appearance="outline" class="item">
         <mat-label>Property Type</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="propertyType" >
+          <mat-option
+            value="{{ proType.title }}"
+            *ngFor="let proType of Property_type"
+            >{{ proType.title }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="item">
         <mat-label>Overview</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="overView">
+          <mat-option value="{{ over._id }}" *ngFor="let over of overView">{{
+            over.title
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="item">
         <mat-label>Amenities</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="amenities">
+          <mat-option value="{{ am._id }}" *ngFor="let am of amenities">{{
+            am.title
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="item">
         <mat-label>Bedroom Types</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="bedRoomTypes">
+          <mat-option value="{{ bdType._id }}" *ngFor="let bdType of bedType">{{
+            bdType.title
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="item">
         <mat-label>Furnishing</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="furnishingTypes">
+          <mat-option value="{{ fType._id }}" *ngFor="let fType of furType">{{
+            fType.title
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" class="item">
         <mat-label>Tags</mat-label>
-        <mat-select> </mat-select>
+        <mat-select multiple formControlName="tags">
+          <mat-option value="{{ tag._id }}" *ngFor="let tag of tags">{{
+            tag.title
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
+  </form>
     <!-- GALLERY -->
     <div class="title-section">
       <hr />
@@ -354,16 +532,28 @@
     <div class="section-item">
       <div class="form-control item">
         <mat-label>Gallery Images</mat-label>&nbsp;
-        <input type="file" placeholder="Picture" />
+        <input type="file"
+        accept="image/*"
+        (change)="uploadFiles($event)"
+        placeholder="Picture" />
       </div>
+     
       <div class="form-control item">
         <mat-label>Slider Images</mat-label>&nbsp;
-        <input type="file" placeholder="Picture" />
+        <input type="file"
+        accept="image/*"
+        (change)="uploadFiles1($event)"
+        placeholder="Picture" />
       </div>
+     
       <div class="form-control item">
         <mat-label>Property Plains</mat-label>&nbsp;
-        <input type="file" placeholder="Picture" />
+        <input type="file" 
+        accept="image/*"
+        (change)="uploadFiles2($event)"
+        placeholder="Picture" />
       </div>
+  
     </div>
     <!-- USERINFO -->
     <div class="title-section">
@@ -388,40 +578,41 @@
       <hr />
       <label>Property Categories</label>
     </div>
-    <!-- <div>
+    <div>
       <mat-tab-group>
         <mat-tab label="Propperty Categories">
-          <div *ngFor="let amen of Amenties" class="padding:10px">
+          <div *ngFor="let pCat of proCat" class="padding:10px">
             <mat-checkbox
               class="example-margin"
               style="margin-left: 20px"
-              [value]="amen.value"
-              >{{ amen.name }}</mat-checkbox
+              [value]="pCat._id"
+              >{{ pCat.title }}</mat-checkbox
             >
           </div>
         </mat-tab>
         <mat-tab label="Most Used">
-          <div *ngFor="let amen of Amenties" class="padding:10px">
+          <div *ngFor="let pCat of proCat" class="padding:10px">
             <mat-checkbox
               class="example-margin"
               style="margin-left: 20px"
-              [value]="amen.value"
-              >{{ amen.name }}</mat-checkbox
+              [value]="pCat._id"
+              >{{ pCat.title }}</mat-checkbox
             >
           </div>
         </mat-tab>
       </mat-tab-group>
-    </div> -->
+    </div>
     <!-- MORTAGE CALCULATOR -->
     <div class="title-section" style="margin-top: 10px">
       <hr />
-      <label>Property Categories</label>
+      <label>Mortage Calculator</label>
     </div>
     <div class="section-item">
       <mat-checkbox class="example-margin" style="margin-left: 20px" value="yes"
         >Show Mortage Calculator</mat-checkbox
       >
     </div>
+    <!-- FEATURED -->
     <div class="title-section" style="margin-top: 10px">
       <hr />
       <label>Featured</label>

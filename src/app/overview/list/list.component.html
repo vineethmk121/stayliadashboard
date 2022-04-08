@@ -27,30 +27,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>3 Bedroom</td>
-                <td><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASESURBVHgB7ZlNUhtHFIDfa/0gqNjFMjuPd6lUkOUbSFVB/GQRcwLDCcAnQDoB4QTYJ0DeBEWKC3mVrQpSqew8OUGUShaANP3SbwRmZrrnT6jlDd8CRj3d0/263193AzzyyINAsED9mzOnWARn8t/VcODujMAicxHg++/O6gLxR/W1uvpZC7xyb26oMfhzywVLFGFG6s7pavHp8q4AeA3hQQdxSmU6UP8PwBIzCdBc+/kVoDhSjw58YXIJwLNefrJyAkivsrYpCPwJLJJZADbMchnPAciBzFC7O7Sn/0whS6X1b3u1Ygl/U49fm94jwlv111GPlUCx27vY2gHLiLQKPPNYlKdqNlej74hgIAQ9v76mdvS9EmoACyBRAF/nfbXRjVX53zf9y80Gq0ihRJoX8jx6Bwsg0QaWniwfkTZ4HEkpd379fWtwV1JA1ASYFK+GsABiV2B97WyXEHa1F+TtBQcfx2BoNwLfESsAIh7qpdTuXW53DNWdyG8XFoRRAJ590Ac1VF6lBWbcyG8HFkTMCuBrraKgWJcolV1Ey7ZffngGC0ATwHeb06TsM+znEwOSJM1gx5ObBiwATYBSKTx4hiS+hwTMHkdfRRtoAiCotDhcMupdbnQgAfY4HNRCrdQq8mqCZXQbwLABElEmfy5BHkfLSiU8AcuYjDgUlBDpI2Tgw9S9uuG2UN+odq3tBZiQAJs1fcmVariQEbVaba0M4Ih3bGCJ1GQuD/3LrbdRW/A7EXhuayVm3lLGUSjQnpR6AsgrsbHWfXE9pnaWPbKfSD5d2VePBzSZNPp//GC0xdCmnlVIdf4p1DHRHs8s5OD2O8YsdvpR6BDQe/DkMDgwf5/9VaU2PSDA3UCK7rJ6sjqzyw7mWdqpRLPapXBf8rh/sZ17+VOFCONmrAckvJf94b3QIuZjwRYvYAY4cqv0o2GyCQMOZCQ4eMYgQNhtqqy0Vq+drsIMsBC86WE1hLlkqKjZgSaA1CrRasmrZD6FMME21LvYfM6CZFwRAEOCSOBpMUmzAZ7tslz+O9RQdcozCXOC+yhOKjUQWBNqgojwGaD8h0C4SDQaj2GwVMLD6IZKSmpEN1PGo8X1te55NCM1NbbF7RHOp0ixy6sYrWsMZKaIqoLRyay2kBeefcgwJsYoAM+0QVedJW/lECzTrP5yaNiLu3GxKDaVMOY1SAfcAVhimjNRCzKM5Y5YAfxVADjW31DLhhD+Eb0Qp9Fy3g0mZQKJyVz/YpMjsCEHma8Q69XePid8htM/V6Xz7aS2qRccKSmBq/TqTdqOLQ6edT6+iXq8u29zJE87HM50Q5OW10wNnt6N/73qZLlSShk445IQO/1hM3U3mPmK6VYI1tFaUj0WRn10KBH+4qB03xFyTuUopa6bDooDZJr5++/mpFk9a6lmVjwRZ75jcd3Kcyw50yUfr4bn4UmCCuTFVZF+b5ZI/6BbyuntpNjPc+UUhNWNffxDUpS5XLNOVwTqCELtpPwrqDg7Ya+l7IM+Tm6oM4/rVysX3Yx2qFW5Gi3qyP2RR3LwP78++NQcDWPHAAAAAElFTkSuQmCC" alt=""></td>
+            <tr *ngFor="let overViewObj of overview">
+                <td>{{overViewObj.title}}</td>
+                <td><img src={{overViewObj.overViewIcon}} alt=""></td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(overViewObj)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button" (click)="deleteOverView(overViewObj._id)" ><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>1510 Sq ft</td>
-                <td><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAQMAAABtzGvEAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURUdwTEYuuCWAR7EAAAABdFJOUwBA5thmAAAAIUlEQVQY02NgIBow/z8ARDioAwwgTDJFC0CuW/D5j2gAAF+uNIEqZ7SWAAAAAElFTkSuQmCC" alt=""></td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3 Bathrooms</td>
-                <td><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPKSURBVHgB7VlNUhpBFH6vGTBmYXGEcZeySoqcIOMCosnCeALJCTyCeARPEHICkkWCgVSJJ5DSlJWdcwRWkULoTj9gUHqm57fHqlT8Nsrrpt/7+nX3+wHgGc/IBIScUN/+/kEAO0KEMgh+0r1+9wVyQC4E6pUfhwCipahqdK/efgbDME4g2PilOuMkjBIIN36p0igJYwTiGb9Ua4yEEQIhxruLv7Z/yAyJzATCjGdM7NA/nOM55EQiE4Eo488Gey592K127LxIpCYQ13gPeZFIRSCp8R7yIJGYQFrjPZgmkYhAVuM9mCQRmwDlNoCsHTCUyHgPpkjEIuC86tilEruUu19WhlIZ70FPAodiMtnp3bwfRK3BoiY4drtcKpESs8YT6LuLWOGujogyWoW2U22Xo9aIJFDaeHkMfjdnNt6DngTYa9OZ7lCEHqH50cFbVS4Ye90b1CPdmwS1rW4VLX6pysdjsdn/rd+oUA+sFTFgB8SJaeMJvRtaU5xALBseoPWAZvfd7tXuJuSIeuWMdNoPEhyO2Z/N/uBgGDRf64FiERxVJoR/h0yDA5yuSkR5ja83dPO1BBBwX5XdF0a51LWPMWF3Ldr1xzIBwtHN198BhOrKIgL6OjeaBOmQnlbuGHujmx9IYPH+2o9liOICnggC4asiKetiQrAHxiXbvyoz/vLogEL4PF2EAJtAQ8BizMeWC5778fEgj6vrk01YAg/8Qwj2gOXfAdlhs+GJIFBE5kAeAgmMYOQ7Lgwx9qJZgchsVTaxRoF3MJDA/LlcfYu5gH14IjAByrOJw8SRWN6k/soSiNU46a0RIDqrAq59wrUEOILypfCQbgq17U5DrT3kq6TNALQEgkM6HEHOkJ72ZZ+FAvR187UE5meOKxER7Hql04ScIJsGvuJJvn6tsMIpNA4wBk2/FI9rW9+qYBiUvksfN33aMDwDDiVAzIUvvZWLUr06U2gGi9rj3KcnYvcJkZH4nt01IaBeJYUmSFApuTDeVobcqN0nRBKYpbcTdqBeaJiTuF2c21SoVbpHaInA3pCsuw/iNA1iN7boeZMvxCfNsEvVWu96rwURoDaNtbHeYPMXzQ6aI9f6GGctQqLWYgQJmHlJBkCKIUxwl4u515jMbbhMD2YRdhak9LlOEuNnGiEhwluCmeDSsUna8UicTj80ooSR37gIAvjpmN2l6jVl+oVm7g2KFXgIKUB1Nt2dn7/2+pASmX8jIxCR6RQcBLYvV3T0Z5zuCMg7Ii4oVTHRJDBCQAVlrdbkxTJaIy8M7/l0GNYi/G/xFwYc22C73uN8AAAAAElFTkSuQmCC" alt=""></td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
+          
         </tbody>
     </table>
     <ul class="pagination">

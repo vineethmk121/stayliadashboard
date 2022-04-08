@@ -1,32 +1,19 @@
 <h1 mat-dialog-title>Update Property Category</h1>
-<div mat-dialog-content  class="form-section">
-    <div class="section-item oneline">
-        <mat-form-field appearance="outline" class="item">
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name">
-        </mat-form-field>
-         <mat-form-field appearance="outline" class="item">
-            <mat-label>Slug</mat-label>
-            <input matInput placeholder="Slug">
-         </mat-form-field> 
-         <mat-form-field appearance="outline" class="item">
-            <mat-label>Parent Category</mat-label>
-            <mat-select>
-                <mat-option value="None">None</mat-option>
-                <mat-option value="Appartment">Appartment</mat-option>
-                <mat-option value="Working">Co Working Space</mat-option>
-                <mat-option value="House">House</mat-option>
-                <mat-option value="Land">Land</mat-option>
-                <mat-option value="PG">PG / Co Living</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="item">
-         <mat-label>Description</mat-label>
-         <textarea matInput formControlName="description" placeholder="Description"></textarea>
-     </mat-form-field>
-    </div>
-</div>
+<form [formGroup]="updateProCat">
+        <div mat-dialog-content  class="form-section">
+            <div class="section-item oneline">
+                <mat-form-field appearance="outline" class="item">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="item">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="filter" placeholder="Description"></textarea>
+            </mat-form-field>
+            </div>
+        </div>
+</form>
 <div mat-dialog-actions>
   <button class="danger" mat-button mat-dialog-close>Close</button>
-  <button class="success" mat-button mat-dialog-close>Save</button>
+  <button class="success" mat-button (click)="updateProCategory()">Save</button>
 </div>

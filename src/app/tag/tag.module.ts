@@ -6,7 +6,7 @@ import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { GlobalModule } from '../global/global.module';
   imports: [
     CommonModule,
     TagRoutingModule,
-    GlobalModule
+    GlobalModule,
+    ReactiveFormsModule
   ]
 })
 export class TagModule { }

@@ -8,9 +8,9 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { ViewComponent } from './view/view.component';
 import { GlobalModule } from '../global/global.module';
-import { GoogleMapsModule } from '@angular/google-maps';
-import { HttpClientJsonpModule } from '@angular/common/http';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     ListComponent,
@@ -24,8 +24,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     GlobalModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
-    GoogleMapsModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule,
+    MatCheckboxModule
   ],
 })
 export class PropertyModule {}

@@ -26,18 +26,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Full Furnished</td>
+            <tr *ngFor="let fur of furType">
+                <td>{{fur.title}}</td>
                 <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Semi Furnished</td>
-                <td class="action">
-                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog()"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(fur)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button mat-mini-fab class="danger action-button"(click)="deleteFur(fur._id)"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
                 </td>
             </tr>
         </tbody>

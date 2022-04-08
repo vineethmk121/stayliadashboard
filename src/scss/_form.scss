@@ -250,6 +250,13 @@ a {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    .item-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .item-container small {
+      color: red;
+    }
     .item {
       width: 375px;
       margin-right: 20px;

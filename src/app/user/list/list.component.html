@@ -31,7 +31,7 @@
             <tr>
                 <th>FName</th>
                 <th>LName</th>
-                <th>Country</th>
+                <th>Email</th>
                 <th>User Type</th>
                 <th>Mobile</th>
                 <th>Gender</th>
@@ -42,14 +42,14 @@
             <tr *ngFor="let user of users">
                 <td>{{user.fName}}</td>
                 <td>{{user.lName}}</td>
-                <td>{{user.country}}</td>
+                <td>{{user.email}}</td>
                 <td>{{user.userType}}</td>
                 <td>{{user.mobile}}</td>
                 <td>{{user.gender}}</td>
                 <td class="action">
                     <button mat-mini-fab class="success action-button" [routerLink]="['view',user._id]"><span class="iconify" data-icon="entypo:eye"></span></button>
-                    <button mat-mini-fab class="info action-button" routerLink="update"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
-                    <button mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled"></span></button>
+                    <button mat-mini-fab class="info action-button" [routerLink]="['update',user._id]"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
+                    <button (click)="deleteUser(user._id)" mat-mini-fab class="danger action-button"><span class="iconify" data-icon="ant-design:delete-filled" ></span></button>
                 </td>
             </tr>
         </tbody>

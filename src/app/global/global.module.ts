@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRippleModule } from '@angular/material/core';
@@ -17,6 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -39,10 +41,12 @@ import { FooterComponent } from './footer/footer.component';
     MatCardModule,
     MatChipsModule,
     MatTabsModule,
+    MatSliderModule,
     AngularEditorModule,
     HttpClientModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   exports: [
     HeaderComponent,
@@ -60,10 +64,13 @@ import { FooterComponent } from './footer/footer.component';
     MatCardModule,
     MatChipsModule,
     MatTabsModule,
+    MatSliderModule,
+
     AngularEditorModule,
     HttpClientModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
 })
 export class GlobalModule {}

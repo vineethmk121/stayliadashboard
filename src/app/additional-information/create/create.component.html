@@ -1,17 +1,27 @@
 <h1 mat-dialog-title>Add Additional Information</h1>
-<div mat-dialog-content  class="form-section">
-    <div class="section-item oneline">
-        <mat-form-field appearance="outline" class="item">
-            <mat-label>Title</mat-label>
-            <input matInput placeholder="Title">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="item">
-            <mat-label>Description</mat-label>
-            <input matInput placeholder="Description">
-        </mat-form-field>
+<form [formGroup]="infoForm">
+    <div mat-dialog-content  class="form-section">
+        <div class="section-item oneline">
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title">
+            </mat-form-field>
+            <small
+            *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
+            >Field is Required</small
+          >
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+            <small
+            *ngIf="userFormControl['description'].touched && userFormControl['description'].errors?.['required']"
+            >Field is Required</small
+          >
+        </div>
     </div>
-</div>
+</form>
 <div mat-dialog-actions>
   <button class="danger" mat-button mat-dialog-close>Close</button>
-  <button class="success" mat-button mat-dialog-close>Save</button>
+  <button class="success" mat-button (click)="addAdditionalinfo()" >Save</button>
 </div>

@@ -9,6 +9,10 @@ import { ViewComponent } from './view/view.component';
 import { GlobalModule } from '../global/global.module';
 import { AgentListComponent } from './agent-list/agent-list.component';
 import { CreateAgentComponent } from './create-agent/create-agent.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,13 +22,17 @@ import { CreateAgentComponent } from './create-agent/create-agent.component';
     UpdateComponent,
     ViewComponent,
     AgentListComponent,
-    CreateAgentComponent
+    CreateAgentComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
-    GlobalModule
-  
+    GlobalModule,
+    NgxPaginationModule,
+    MatGridListModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }

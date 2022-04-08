@@ -1,73 +1,152 @@
 <div class="header">
-    <img src="assets/images/logo.png" alt="">
+  <img src="assets/images/logo.png" alt="" />
 </div>
 <mat-divider class="divider"></mat-divider>
 <div class="menu">
-    <div class="item" matRipple [routerLink]="['/dashboard']" routerLinkActive="active">
-        <span class="iconify" data-icon="ic:round-dashboard" ></span>
-        <div class="name">Dashboard</div>
-    </div>
-    <div class="title">ORGANIZATION MODULES</div>
-    <div class="item" matRipple [routerLink]="['/user']" routerLinkActive="active" >
-        <span class="iconify" data-icon="gridicons:multiple-users"></span>
-        <div class="name">Users</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/property']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:book-variant-multiple"></span>
-        <div class="name">Properties</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/agent']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:account-switch"></span>
-        <div class="name">My Agents</div>
-    </div>
-    <div class="title">GENERAL MODULES</div>
-    <div class="item" matRipple [routerLink]="['/property-type']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:book-open-page-variant"></span>
-        <div class="name">Property Types</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/property-category']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:book-open-page-variant"></span>
-        <div class="name">Property Categories</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/additional-information']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:comment-text-outline"></span>
-        <div class="name">Additional Information</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/amenities']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:cube-send"></span>
-        <div class="name">Amenities</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/bedroom-type']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:hospital-building"></span>
-        <div class="name">Bedroom Types</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/furnishing-type']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:file-document"></span>
-        <div class="name">Furnishing Types</div>
-    </div>
-    <div class="item" matRipple [routerLink]="['/nationality']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:account-convert"></span>
-        <div class="name">Nationalities</div>
-    </div>
-    <div class="item" matRipple  [routerLink]="['/overview']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:debug-step-over"></span>
-        <div class="name">Overviews</div>
-    </div>
-    <div class="item" matRipple  [routerLink]="['/specality']" routerLinkActive="active">
-        <span class="iconify" data-icon="logos:buffer"></span>
-        <div class="name">Specalities</div>
-    </div>
-    <div class="item" matRipple  [routerLink]="['/tag']" routerLinkActive="active">
-        <span class="iconify" data-icon="mdi:bulletin-board"></span>
-        <div class="name">Tags</div>
-    </div>
-    <div class="title">SETTINGS</div>
-    <div class="item" matRipple  [routerLink]="['/filter']" routerLinkActive="active">
-        <span class="iconify" data-icon="ci:filter-outline"></span>
-        <div class="name">Filter Types</div>
-    </div>
-    <div class="item" matRipple  [routerLink]="['/faq']" routerLinkActive="active">
-        <span class="iconify" data-icon="ic:baseline-library-books"></span>
-        <div class="name">Faq</div>
-    </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/dashboard']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="ic:round-dashboard"></span>
+    <div class="name">Dashboard</div>
+  </div>
+  <div class="title">ORGANIZATION MODULES</div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/user']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="gridicons:multiple-users"></span>
+    <div class="name">Users</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/property']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:book-variant-multiple"></span>
+    <div class="name">Properties</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/agent']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:account-switch"></span>
+    <div class="name">My Agents</div>
+  </div>
+  <div class="title">GENERAL MODULES</div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/property-type']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:book-open-page-variant"></span>
+    <div class="name">Property Types</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/property-category']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:chrome-reader-mode"></span>
+    <div class="name">Property Categories</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/additional-information']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:comment-text-outline"></span>
+    <div class="name">Additional Information</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/amenities']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:cube-send"></span>
+    <div class="name">Amenities</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/bedroom-type']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:hospital-building"></span>
+    <div class="name">Bedroom Types</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/furnishing-type']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:file-document"></span>
+    <div class="name">Furnishing Types</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/nationality']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:account-convert"></span>
+    <div class="name">Nationalities</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/overview']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:debug-step-over"></span>
+    <div class="name">Overviews</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/specality']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="logos:buffer"></span>
+    <div class="name">Specalities</div>
+  </div>
+  <div class="item" matRipple [routerLink]="['/tag']" routerLinkActive="active">
+    <span class="iconify" data-icon="mdi:bulletin-board"></span>
+    <div class="name">Tags</div>
+  </div>
+  <div class="title">SETTINGS</div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['user/changePassword']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="mdi:account"></span>
+    <div class="name">Change Password</div>
+  </div>
+  <div
+    class="item"
+    matRipple
+    [routerLink]="['/filter']"
+    routerLinkActive="active"
+  >
+    <span class="iconify" data-icon="ci:filter-outline"></span>
+    <div class="name">Filter Types</div>
+  </div>
+  <div class="item" matRipple [routerLink]="['/faq']" routerLinkActive="active">
+    <span class="iconify" data-icon="ic:baseline-library-books"></span>
+    <div class="name">Faq</div>
+  </div>
 </div>

@@ -1,20 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'user-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  users:any[] = [];
-  constructor(private _userService:UserService) { }
-
+  users: any[] = [];
+ 
+  constructor(private _userService: UserService) {}
+ 
   ngOnInit(): void {
-    this._userService.getAllUsers().subscribe(res=>{
-      this.users = res.data;
-      console.log(res);
-    })
+    this._userService.getAllUsers().subscribe({
+      next: (res) => {
+        this.users = res.data;
+        console.log(res);
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire(`${error.error.message}`);
+      },
+    });
   }
-
+  deleteUser(u_id:any){
+    this._userService.deleteSUser(u_id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire(`${error.error.message}`);
+      },
+    });
+    this._userService.getAllUsers().subscribe({
+      next: (res) => {
+        this.users = res.data;
+        console.log(res);
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire(`${error.error.message}`);
+      },
+    });
+  }
 }
