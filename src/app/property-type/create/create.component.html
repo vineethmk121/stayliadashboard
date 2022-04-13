@@ -1,19 +1,14 @@
 <h1 mat-dialog-title>Add Property Type</h1>
 <form [formGroup]="proTypeForm">
     <div mat-dialog-content  class="form-section">
-        <div class="section-item oneline">
+        <div class="section-item oneline block">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Name</mat-label>
                 <input matInput placeholder="Name" formControlName="title">
             </mat-form-field>
-            <small
+            <mat-error
             *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
-            >Field is Required</small
-          >
-            <!-- <mat-form-field appearance="outline" class="item">
-                <mat-label>Slug</mat-label>
-                <input matInput placeholder="Slug" formControlName="slug">
-            </mat-form-field>  -->
+            >Field is Required</mat-error>
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Parent Category</mat-label>
                 <mat-select formControlName="filter">
@@ -25,14 +20,9 @@
                     <mat-option value="PG">PG / Co Living</mat-option>
                 </mat-select>
             </mat-form-field>
-            <!-- <mat-form-field appearance="outline" class="item">
-            <mat-label>Description</mat-label>
-            <textarea matInput  placeholder="Description" formControlName="description"></textarea>
-            </mat-form-field> -->
-            <!-- <div class="form-control item">
-                <mat-label>Color</mat-label>&nbsp;
-                <input type="color" placeholder="Picture" formControlName="clr">
-            </div> -->
+            <mat-error
+            *ngIf="userFormControl['filter'].touched && userFormControl['filter'].errors?.['required']"
+            >Field is Required</mat-error>
         </div>
     </div>
 </form>

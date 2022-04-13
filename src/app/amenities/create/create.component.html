@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Add Amenities</h1>
 <form [formGroup]="amenForm">
     <div mat-dialog-content  class="form-section">
-        <div class="section-item oneline">
+        <div class="section-item oneline block">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Title" formControlName="title">
             </mat-form-field>
-            <small
+            <mat-error
             *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
-            >Field is Required</small
+            >Field is Required</mat-error
           >
             <div class="form-control item">
                 <mat-label>Icon</mat-label>&nbsp;
@@ -17,9 +17,9 @@
                 (change)="uploadFiles($event)"
                 placeholder="Picture">
             </div>
-            <small
+            <mat-error
             *ngIf="userFormControl['amenitiesIcon'].touched && userFormControl['amenitiesIcon'].errors?.['required']"
-            >Picture is Required</small>
+            >Picture is Required</mat-error>
         </div>
     </div>
 </form>

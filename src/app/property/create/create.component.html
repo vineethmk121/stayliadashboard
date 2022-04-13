@@ -16,33 +16,33 @@
   </div>
   <div class="form-section">
     <form [formGroup]="ConfigForm">
-      <div class="section-item oneline">
+      <div class="section-item oneline block">
         <mat-form-field appearance="outline" class="item">
           <mat-label>Title</mat-label>
           <input
             formControlName="title"
             matInput
-            
-            placeholder="Title"
-          />
+            class="cus-width"
+            placeholder="Title"/>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="item">
-          <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            formControlName="description"
-         
-            placeholder="Description"
-          ></textarea>
-        </mat-form-field>
+        <mat-error
+        *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
+        >Field is Required</mat-error>
+        <angular-editor
+        formControlName="description"
+        [config]="editorConfigDes"
+      ></angular-editor>
       </div>
+      <mat-error
+      *ngIf="userFormControl['description'].touched && userFormControl['description'].errors?.['required']"
+      >Field is Required</mat-error>
     </form>
     <!-- PROPERTY -->
-    <div class="title-section">
+    <!-- <div class="title-section">
       <hr />
       <label>Property</label>
-    </div>
-    <div class="section-item">
+    </div> -->
+    <!-- <div class="section-item">
       <mat-tab-group>
         <mat-tab label="Property Feature">
           <div class="section-item oneline">
@@ -112,7 +112,7 @@
                     <td>
                       <div class="section-item">
                         <div class="form-control item">
-                          <!-- <mat-label>Profile Picture</mat-label>&nbsp; -->
+                           <mat-label>Profile Picture</mat-label>&nbsp; 
                           <input
                             #configImage
                             id="configImage"
@@ -233,7 +233,7 @@
           </button>
         </mat-tab>
       </mat-tab-group>
-    </div>
+    </div> -->
     <!-- LOCATION -->
     <div class="title-section">
       <hr />
@@ -244,11 +244,12 @@
       <form [formGroup]="ConfigForm">
         <mat-form-field appearance="outline" class="item">
           <mat-label>Latitude</mat-label>
-          <input matInput formControlName="latitude" placeholder="Latitude" />
+          <input matInput  placeholder="Latitude"  />
         </mat-form-field>
+        
         <mat-form-field appearance="outline" class="item">
           <mat-label>Longitude</mat-label>
-          <input matInput formControlName="longitude" placeholder="Longitude" />
+          <input matInput  placeholder="Longitude" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
           <mat-label>City</mat-label>
@@ -267,7 +268,7 @@
           <input
             matInput
             placeholder="NeighbourHood"
-            formControlName="neighbourhood"
+            formControlName="neighbourHood"
           />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
@@ -312,10 +313,10 @@
             formControlName="sellingPrice"
           />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="item">
+        <!-- <mat-form-field appearance="outline" class="item">
           <mat-label>Price Label(e.g."per month")</mat-label>
           <input matInput placeholder="Label" formControlName="lblPrice" />
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field appearance="outline" class="item">
           <mat-label>Discount Price</mat-label>
           <input
@@ -326,15 +327,15 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
           <mat-label>Area(sq ft)</mat-label>
-          <input matInput placeholder="Area(sq ft)" formControlName="area" />
+          <input matInput placeholder="Area(sq ft)" formControlName="areaSqrFt" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
           <mat-label>Bedroom</mat-label>
-          <input matInput placeholder="Bedroom" formControlName="bedroom" />
+          <input matInput placeholder="Bedroom" formControlName="totalBedRooms" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
           <mat-label>Bathrooms</mat-label>
-          <input matInput placeholder="Bathrooms" formControlName="bathroom" />
+          <input matInput placeholder="Bathrooms" formControlName="totalBatRooms" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
           <mat-label>Deposit</mat-label>
@@ -349,28 +350,32 @@
     <!-- ADDITIONAL INFO -->
     <div class="title-section">
       <hr />
-      <label>Addional Information</label>
+      <label>Additional Information</label>
     </div>
     <div class="section-item">
       <form [formGroup]="ConfigForm">
-        <mat-form-field appearance="outline" class="item">
-          <mat-label>Additional Info</mat-label>
-          <input
-            matInput
-            placeholder="Additional Info"
-            formControlName="additionalInfo"
-          />
+        <mat-form-field
+        appearance="outline" class="item m-width"
+      >
+        <mat-label>Additional Information</mat-label>
+        <mat-select multiple formControlName="additionalInfo">
+          <mat-option
+          value="{{ addInfo._id }}"
+          *ngFor="let addInfo of additionalInfo"
+          >{{ addInfo.title }}</mat-option
+        >
+        </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
-          <mat-label>Built In</mat-label>
-          <input matInput placeholder="Built In" formControlName="buildIn" />
+          <mat-label>Property Code</mat-label>
+          <input matInput placeholder="Property Code" formControlName="propertyCode" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
-          <mat-label>Parking Spaces</mat-label>
+          <mat-label>Licence Number</mat-label>
           <input
             matInput
-            placeholder="Parking Spaces"
-            formControlName="parkingSpace"
+            placeholder="Licence Number"
+            formControlName="licenseNumber"
           />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
@@ -378,29 +383,76 @@
           <input
             matInput
             placeholder="Room Count"
-            formControlName="roomCount"
+            formControlName="totalRoomCounts"
           />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
-          <mat-label>Unit Count</mat-label>
+          <mat-label>Permit</mat-label>
           <input
             matInput
-            placeholder="Unit Count"
-            formControlName="unitCount"
+            placeholder="Permit"
+            formControlName="permit"
           />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
-          <mat-label>Lot Depth</mat-label>
-          <input matInput placeholder="Lot Depth" formControlName="lotDepth" />
+          <mat-label>Age of Property</mat-label>
+          <input matInput placeholder="Age of Property" formControlName="propertyAge" />
         </mat-form-field>
         <mat-form-field appearance="outline" class="item">
-          <mat-label>Lot Width</mat-label>
-          <input matInput placeholder="Lot Width" formControlName="lotWidth" />
+          <mat-label>Area ID</mat-label>
+          <input matInput placeholder="Area ID" formControlName="areaId" />
         </mat-form-field>
+        <mat-form-field
+        appearance="outline" class="item m-width"
+      >
+        <mat-label>Furnishing Status</mat-label>
+        <mat-select formControlName="furnishingStatusId" >
+          <mat-option value="Furnished">Furnished</mat-option>
+          <mat-option value="SemiFurnished">Semi Furnished</mat-option>
+          <mat-option value="Unfurnished">Unfurnished</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field
+        appearance="outline" class="item m-width">
+        <mat-label>Land Status</mat-label>
+        <mat-select formControlName="landStatusId">
+          <mat-option value="farm">Farm Land</mat-option>
+          <mat-option value="commercial">Commercial</mat-option>
+          <mat-option value="residential">Residential</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+      appearance="outline" class="item m-width">
+      <mat-label>Construction status</mat-label>
+      <mat-select formControlName="contructonId">
+        <mat-option value="farm">Under construction</mat-option>
+        <mat-option value="commercial">Ready to Move</mat-option>
+        <mat-option value="residential">Residential</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field
+    appearance="outline" class="item m-width"
+  >
+    <mat-label>Posted by</mat-label>
+    <mat-select formControlName="createdBy">
+      <mat-option value="Owner">Owner</mat-option>
+      <mat-option value="Builder">Builder</mat-option>
+      <mat-option value="Agents">Agents</mat-option>
+      <mat-option value="Agency">Agency</mat-option>
+    </mat-select>
+    <mat-error
+    *ngIf="userFormControl['createdBy'].touched && userFormControl['createdBy'].errors?.['required']"
+    >Select An Option</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="item">
+    <mat-label>Listed Date</mat-label>
+    <input matInput placeholder="Listed Date" formControlName="listedDate" />
+  </mat-form-field>
+ 
       </form>
     </div>
     <!-- AMENITIES -->
-    <form [formGroup]="ConfigForm">
+    <!-- <form [formGroup]="ConfigForm">
     <div class="title-section">
       <hr />
       <label>Amenities</label>
@@ -417,11 +469,11 @@
         </label>
       </div>
     </div>
-  </form>
+  </form> -->
     <!-- FLOORSPLAN -->
     <div class="title-section">
       <hr />
-      <label>Floor Plans</label>
+      <label>Property Plans</label>
     </div>
     <div class="section-item">
       <div class="form-control item">
@@ -429,6 +481,9 @@
         <input type="file" placeholder="Picture" />
       </div>
     </div>
+    <mat-error
+    *ngIf="userFormControl['propertyPlan'].touched && userFormControl['propertyPlan'].errors?.['required']"
+    >Picture is Required</mat-error>
     <!-- AGENT -->
     <div class="title-section">
       <hr />
@@ -440,14 +495,14 @@
           <mat-label>Select Agents</mat-label>
           <mat-select formControlName="agent">
             <mat-option value="{{ ag._id }}" *ngFor="let ag of agentList">{{
-              ag.userType
+              ag._id
             }}</mat-option>
           </mat-select>
         </mat-form-field>
       </form>
     </div>
     <!-- VIDEO -->
-    <div class="title-section">
+    <!-- <div class="title-section">
       <hr />
       <label>Video</label>
     </div>
@@ -464,7 +519,7 @@
         <mat-label>Video Id</mat-label>
         <input matInput placeholder="Enter Video Id" />
       </mat-form-field>
-    </div>
+    </div> -->
     <!-- PROPERTYINFORMATION -->
     <div class="title-section">
       <hr />
@@ -473,7 +528,7 @@
     <form [formGroup]="ConfigForm">
     <div class="section-item">
       <mat-form-field appearance="outline" class="item">
-        <mat-label>Property Type</mat-label>
+        <mat-label>Property Category</mat-label>
         <mat-select multiple formControlName="propertyType" >
           <mat-option
             value="{{ proType.title }}"
@@ -522,38 +577,55 @@
           }}</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field
+      appearance="outline" class="item m-width">
+      <mat-label>Property Type</mat-label>
+      <mat-select multiple formControlName="propertySaleType">
+        <mat-option value="sale">Sale</mat-option>
+        <mat-option value="rent">Rent</mat-option>
+        <mat-option value="buy">Buy</mat-option>
+        <mat-option value="commercial">Commercial</mat-option>
+        <mat-option value="land">Land/Plot</mat-option>
+      </mat-select>
+      </mat-form-field>
     </div>
   </form>
     <!-- GALLERY -->
     <div class="title-section">
       <hr />
-      <label>Gallery</label>
+      <label>Images</label>
     </div>
     <div class="section-item">
-      <div class="form-control item">
+      <div class="form-control block item">
         <mat-label>Gallery Images</mat-label>&nbsp;
-        <input type="file"
+        <input type="file" multiple
         accept="image/*"
         (change)="uploadFiles($event)"
         placeholder="Picture" />
       </div>
-     
-      <div class="form-control item">
+      <mat-error
+      *ngIf="userFormControl['gallaryImages'].touched && userFormControl['gallaryImages'].errors?.['required']"
+      >Picture is Required</mat-error>
+      <div class="form-control block item">
         <mat-label>Slider Images</mat-label>&nbsp;
-        <input type="file"
+        <input type="file" multiple
         accept="image/*"
         (change)="uploadFiles1($event)"
         placeholder="Picture" />
       </div>
-     
-      <div class="form-control item">
+      <mat-error
+      *ngIf="userFormControl['sliderImages'].touched && userFormControl['sliderImages'].errors?.['required']"
+      >Picture is Required</mat-error>
+      <div class="form-control block item">
         <mat-label>Property Plains</mat-label>&nbsp;
-        <input type="file" 
+        <input type="file" multiple
         accept="image/*"
         (change)="uploadFiles2($event)"
         placeholder="Picture" />
       </div>
-  
+      <mat-error
+      *ngIf="userFormControl['propertyPlan'].touched && userFormControl['propertyPlan'].errors?.['required']"
+      >Picture is Required</mat-error>
     </div>
     <!-- USERINFO -->
     <div class="title-section">
@@ -569,12 +641,10 @@
         <mat-label>agent</mat-label>
         <mat-select> </mat-select>
       </mat-form-field>
-      <mat-slide-toggle class="form-control item" color="primary"
-        >Is Approved</mat-slide-toggle
-      >
+      <mat-slide-toggle class="form-control item" color="primary">Is Approved</mat-slide-toggle>
     </div>
     <!-- PROPERTY CATEGORIES -->
-    <div class="title-section">
+    <!-- <div class="title-section">
       <hr />
       <label>Property Categories</label>
     </div>
@@ -589,8 +659,8 @@
               >{{ pCat.title }}</mat-checkbox
             >
           </div>
-        </mat-tab>
-        <mat-tab label="Most Used">
+        </mat-tab> -->
+        <!-- <mat-tab label="Most Used">
           <div *ngFor="let pCat of proCat" class="padding:10px">
             <mat-checkbox
               class="example-margin"
@@ -599,11 +669,39 @@
               >{{ pCat.title }}</mat-checkbox
             >
           </div>
-        </mat-tab>
-      </mat-tab-group>
+        </mat-tab> -->
+      <!-- </mat-tab-group>
+    </div> -->
+    <!-- <div class="title-section">
+      <hr />
+      <label>Property Types</label>
     </div>
+    <div>
+      <mat-tab-group>
+        <mat-tab label="Propperty Types">
+          <div *ngFor="let pType of Property_type" class="padding:10px">
+            <mat-checkbox
+              class="example-margin"
+              style="margin-left: 20px"
+              [value]="pType._id"
+              >{{ pType.title }}</mat-checkbox
+            >
+          </div>
+        </mat-tab> -->
+        <!-- <mat-tab label="Most Used">
+          <div *ngFor="let pType of Property_type" class="padding:10px">
+            <mat-checkbox
+              class="example-margin"
+              style="margin-left: 20px"
+              [value]="pType._id"
+              >{{ pType.title }}</mat-checkbox
+            >
+          </div>
+        </mat-tab> -->
+      <!-- </mat-tab-group>
+    </div> -->
     <!-- MORTAGE CALCULATOR -->
-    <div class="title-section" style="margin-top: 10px">
+    <!-- <div class="title-section" style="margin-top: 10px">
       <hr />
       <label>Mortage Calculator</label>
     </div>
@@ -611,20 +709,17 @@
       <mat-checkbox class="example-margin" style="margin-left: 20px" value="yes"
         >Show Mortage Calculator</mat-checkbox
       >
-    </div>
+    </div> -->
     <!-- FEATURED -->
     <div class="title-section" style="margin-top: 10px">
       <hr />
       <label>Featured</label>
     </div>
+    <form [formGroup]="ConfigForm">
     <div style="margin-top: 10px">
-      <mat-checkbox class="example-margin" style="margin-left: 20px" value="yes"
-        >Set as Featured</mat-checkbox
-      >
-      <div class="form-control item" style="width: 40%">
-        <mat-label>Gallery Images</mat-label>&nbsp;
-        <input type="file" placeholder="Picture" />
-      </div>
+      <mat-checkbox class="example-margin" style="margin-left: 20px" formControlName="setAsFeature" (change)="checkBoxvalue1($event)" value="yes"
+        >Set as Featured</mat-checkbox>
     </div>
+  </form>
   </div>
 </div>

@@ -21,9 +21,53 @@ export class CreateComponent implements OnInit {
   tags: any[] = [];
   proCat: any[] = [];
   agentList: any[] = [];
+  additionalInfo: any[] =[];
   propertyForm: any;
   center = { lat: 32.16515, lng: 74.184505 };
   editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    // uploadUrl: 'v1/image',
+    // upload: (file: File) => { ... }
+    // uploadWithCredentials: false,
+    // sanitize: true,
+    // toolbarPosition: 'top',
+    toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
+  };
+  editorConfigDes: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: 'auto',
@@ -86,40 +130,40 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.ConfigForm = this.fb.group({
-      Configuration: this.fb.array([this.addConfigGroup()]),
-      details: this.fb.array([this.addSideBarControl()]),
+      // Configuration: this.fb.array([this.addConfigGroup()]),
+      // details: this.fb.array([this.addSideBarControl()]),
       title: [null, Validators.required],
       description: [null, Validators.required],
-      longitude: [null, Validators.required],
-      latitude: [null, Validators.required],
+      // longitude: [null, Validators.required],
+      // latitude: [null, Validators.required],
       city: [null, Validators.required],
-      status: [null, Validators.required],
-      totalArea: [null, Validators.required],
-      totalLaunchedApparments: [null, Validators.required],
-      availability: [null, Validators.required],
-      editor: [null, Validators.required],
+      // status: [null, Validators.required],
+      // totalArea: [null, Validators.required],
+      // totalLaunchedApparments: [null, Validators.required],
+      // availability: [null, Validators.required],
+      // editor: [null, Validators.required],
       country:[null, Validators.required],
       address: [null, Validators.required],
-      neighbourhood: [null, Validators.required],
+      neighbourHood: [null, Validators.required],
       flatNumber: [null, Validators.required],
       street: [null, Validators.required],
       countryCode: [null, Validators.required],
       sellingPrice: [null, Validators.required],
-      lblPrice: [null, Validators.required],
+      // lblPrice: [null, Validators.required],
       state: [null, Validators.required],
       discountPrice: [null, Validators.required],
-      area: [null, Validators.required],
-      bedroom: [null, Validators.required],
-      bathroom: [null, Validators.required],
+      // area: [null, Validators.required],
+      totalBedRooms: [null, Validators.required],
+      totalBatRooms: [null, Validators.required],
       deposite: [null, Validators.required],
       rent: [null, Validators.required],
       additionalInfo: [null, Validators.required],
-      buildIn: [null, Validators.required],
-      parkingSpace: [null, Validators.required],
-      roomCount: [null, Validators.required],
-      unitCount: [null, Validators.required],
-      lotDepth: [null, Validators.required],
-      lotWidth: [null, Validators.required],
+      propertyCode: [null, Validators.required],
+      licenseNumber: [null, Validators.required],
+      totalRoomCounts: [null, Validators.required],
+      // unitCount: [null, Validators.required],
+      propertyAge: [null, Validators.required],
+      areaId: [null, Validators.required],
       agent: [null, Validators.required],
       // amenities: this.fb.array([], [Validators.required]),
       gallaryImages:[null,Validators.required],
@@ -131,12 +175,16 @@ export class CreateComponent implements OnInit {
       furnishingTypes:[null, Validators.required],
       tags:[null, Validators.required],
       propertyType:[null,Validators.required],
-      contructonId:['622735fc4def0a1f9460f12c'],
-      landStatusId:['62271a79b8673c2c388cc638'],
-      furnishingStatusId:['622716946a21c70e74445793'],
-      priceRangeId:['622707f2795fed20e8e8b707'],
-      areaRangeId:['62271068e75b803624a75eb3'],
-      agency:['620f78e73be80b47580554d0']
+      contructonId:[null,Validators.required],
+      landStatusId:[null,Validators.required],
+      furnishingStatusId:[null,Validators.required],
+      agency:['620f78e73be80b47580554d0'],
+      createdBy:['62446562deca2b0ff06191d6'],
+      listedDate:[null,Validators.required],
+      setAsFeature:[null,Validators.required],
+      propertySaleType:[null,Validators.required],
+      permit:[null,Validators.required],
+      areaSqrFt:[null,Validators.required]
     });
 
     let loader = new Loader({
@@ -199,6 +247,10 @@ export class CreateComponent implements OnInit {
       this.proCat = res.data;
       console.log(this.proCat);
     });
+    this.service.getAdditionalInfo().subscribe((res)=>{
+      console.log(res);
+      this.additionalInfo=res.data;
+    })
     this.service.getAgent().subscribe((res) => {
       this.agentList = res.data;
       console.log('agent');
@@ -318,6 +370,23 @@ export class CreateComponent implements OnInit {
     });
   }
   }
+  checkBoxvalue1(event:any){
+    const setAsFeature: FormArray = this.ConfigForm.get('setAsFeature') as FormArray;
+    console.log(setAsFeature);
+    if(event.target.checked){
+      setAsFeature.push(new FormControl(event.target.value));
+    }
+    else{
+      let i : number = 0;
+      setAsFeature.controls.forEach((item: any)=>{
+        if(item.value == event.target.value){
+          setAsFeature.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+    }
   uploadFiles(event: any) : void {
     const file = event.target.files[0];
     console.log(file);
@@ -366,6 +435,13 @@ export class CreateComponent implements OnInit {
   onSubmit() {
     console.log(this.ConfigForm.value);
     console.log(this.ConfigForm);
+    if (this.ConfigForm.invalid) {
+      // Object.keys(this.amenForm.controls).forEach((key) => {
+      //   this.amenForm.controls[key].markAsTouched();
+      // });
+      this.ConfigForm.markAllAsTouched();
+      return;
+    }
     // if (this.ConfigForm.invalid) {
     //   Object.keys(this.ConfigForm.controls).forEach((key) => {
     //     this.ConfigForm.controls[key].markAsTouched();

@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Update Property Type</h1>
 <form [formGroup]="pro_type_form">
     <div mat-dialog-content  class="form-section">
-        <div class="section-item oneline">
+        <div class="section-item oneline block">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Title" formControlName="title">
@@ -26,6 +26,6 @@
     </div>
 </form>
 <div mat-dialog-actions>
-  <button class="danger" mat-button mat-dialog-close>Close</button>
-  <button class="success" mat-button (click)="updateProType()" >Save</button>
+  <button class="danger" mat-button mat-dialog-close (click)="getpTypeFun()" >Close</button>
+  <button class="success" mat-button mat-dialog-close (click)="updateProType()" >Save</button>
 </div>

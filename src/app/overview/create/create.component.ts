@@ -1,7 +1,9 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { OverviewService } from '../overview.service';
 import Swal from 'sweetalert2'
+import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'overview-create',
   templateUrl: './create.component.html',
@@ -10,7 +12,7 @@ import Swal from 'sweetalert2'
 export class CreateComponent implements OnInit {
   OverViewForm!: FormGroup;
   ImagePreview!: string;
-  constructor(private fb:FormBuilder, private service:OverviewService) { }
+  constructor(private fb:FormBuilder, private service:OverviewService, private spinner:LoaderService,private dialogRef:MatDialogRef<CreateComponent>) { }
 
   ngOnInit(): void {
     this.OverViewForm = this.fb.group({
@@ -46,10 +48,13 @@ export class CreateComponent implements OnInit {
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.createOverview(formData).subscribe({
       next: (res) => {
         console.log(res);
         this.OverViewForm= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

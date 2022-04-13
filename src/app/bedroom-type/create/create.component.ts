@@ -1,6 +1,9 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { BedroomTypeService } from './../bedroom-type.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'bedroom-type-create',
@@ -9,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateComponent implements OnInit {
   bedForm!: FormGroup;
-  constructor(private bedService:BedroomTypeService, private fb:FormBuilder) { }
+  constructor(private bedService:BedroomTypeService, private fb:FormBuilder, private spinner:LoaderService, private dialogRef:MatDialogRef<CreateComponent>) { }
 
   ngOnInit(): void {
     this.bedForm = this.fb.group({
@@ -29,8 +32,22 @@ export class CreateComponent implements OnInit {
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
-    this.bedService.createbedroom(UserForm).subscribe((res)=>{
-        console.log(res);  
+    // this.bedService.createbedroom(UserForm).subscribe((res)=>{
+    //     console.log(res);  
+    // });
+    this.spinner.showSpinner();
+    this.bedService.createbedroom(UserForm).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.bedForm=res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
+        Swal.fire(`${res.message}`);
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire(`${error.error.message}`);
+      }
     });
   }
   get userFormControl() {

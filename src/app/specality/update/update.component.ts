@@ -70,6 +70,7 @@ export class UpdateComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.specialities= res.data;
+        this.dialogRef.close({status:true});
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

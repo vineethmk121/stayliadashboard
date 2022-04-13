@@ -4,6 +4,8 @@ import { CreateComponent } from '../create/create.component';
 import { UpdateComponent } from '../update/update.component';
 import { AdditionalInformationService } from '../additional-information.service';
 import Swal from 'sweetalert2';
+import { LoaderService } from 'src/app/services/loader.service';
+
 @Component({
   selector: 'additional-information-list',
   templateUrl: './list.component.html',
@@ -11,18 +13,25 @@ import Swal from 'sweetalert2';
 })
 export class ListComponent implements OnInit {
   info:any[]=[];
-  constructor(public dialog: MatDialog, private service:AdditionalInformationService) { }
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 10;
+  constructor(public dialog: MatDialog, private service:AdditionalInformationService, private spinner:LoaderService) { }
 
   ngOnInit(): void {
+  this.getAllRecords();
+  }
+  getAllRecords(){
+    this.spinner.showSpinner();
     this.service.getInfo().subscribe({
       next: (res) => {
         console.log(res);
         this.info= res.data;
-        Swal.fire(`${res.message}`);
+        this.spinner.hideSpinner();
       },
       error: (error) => {
         console.log(error);
-        Swal.fire(`${error.error.message}`);
+    
       },
     });
   }
@@ -30,6 +39,9 @@ export class ListComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result?.status){
+        this.getAllRecords();
+      }
     });
   }
   openUpdateDialog(add_info:any){
@@ -38,11 +50,25 @@ export class ListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result?.status){
+        this.getAllRecords();
+      }
     });
   }
   deleteInfo(id:any){
-      this.service.deleteadInfo(id).subscribe((res)=>{
-        console.log(res);
+    this.spinner.showSpinner();
+      this.service.deleteadInfo(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.info= res.data;
+          this.spinner.hideSpinner();
+          this.getAllRecords();
+          Swal.fire(`${res.message}`);
+        },
+        error: (error) => {
+          console.log(error);
+          Swal.fire(`${error.error.message}`);
+        },
       });
       this.service.getInfo().subscribe({
         next: (res) => {
@@ -56,4 +82,12 @@ export class ListComponent implements OnInit {
         },
       });
   }
+  onTableDataChange(event: any) {
+    this.page = event;
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+  }
+  
 }

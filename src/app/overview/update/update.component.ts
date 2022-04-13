@@ -3,6 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OverviewService } from '../overview.service';
 import Swal from 'sweetalert2'
+import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'overview-update',
   templateUrl: './update.component.html',
@@ -11,7 +12,8 @@ import Swal from 'sweetalert2'
 export class UpdateComponent implements OnInit {
   overview:any;
   ImagePreview!:string;
-  constructor(private service:OverviewService, public dialogRef: MatDialogRef<UpdateComponent>,
+  constructor(private spinner:LoaderService,
+    private service:OverviewService, public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,) { 
       this.overview = data;
       console.log(data);
@@ -65,10 +67,13 @@ export class UpdateComponent implements OnInit {
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.updateOverview(this.overview._id,formData).subscribe({
       next: (res) => {
         console.log(res);
         this.overview= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

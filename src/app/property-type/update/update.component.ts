@@ -1,9 +1,11 @@
+import { LoaderService } from './../../services/loader.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { PropertyTypeService } from '../property-type.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 export interface Filter {
   name: string;
 }
@@ -42,7 +44,7 @@ export class UpdateComponent implements OnInit {
   }
   constructor(private service:PropertyTypeService, 
     public dialogRef:MatDialogRef<UpdateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any,) {
+    @Inject(MAT_DIALOG_DATA) public data:any, private spinner:LoaderService) {
       this.pro = data;
       console.log(data);
      }
@@ -61,11 +63,32 @@ export class UpdateComponent implements OnInit {
         {
         const formValue = this.pro_type_form.getRawValue();
         console.log(formValue);
-        
-        this.service.updateProType(this.pro._id, {title:formValue.title,filter:formValue.filter}).subscribe((res)=>{
-          console.log(res);          
-        })
-    }  
+        this.spinner.showSpinner();
+        this.service.updateProType(this.pro._id, {title:formValue.title,filter:formValue.filter}).subscribe({
+          next: (res) => {
+            console.log(res);
+            this.dialogRef.close({status:true});
+            this.spinner.hideSpinner();
+            Swal.fire(`${res.message}`);
+          },
+          error: (error) => {
+            console.log(error);
+            Swal.fire(`${error.error.message}`);
+          },
+        });
+    }
+    getpTypeFun(){
+      this.service.propertyType().subscribe({
+        next: (res) => {
+          console.log(res);
+          Swal.fire(`${res.message}`);
+        },
+        error: (error) => {
+          console.log(error);
+          Swal.fire(`${error.error.message}`);
+        },
+      });
+    }
     get userFormControl() 
   {
       return this.pro_type_form.controls;

@@ -6,7 +6,7 @@ import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { GlobalModule } from '../global/global.module';
   imports: [
     CommonModule,
     NationalityRoutingModule,
-    GlobalModule
+    GlobalModule,
+    NgxPaginationModule
   ]
 })
 export class NationalityModule { }

@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { Component, OnInit ,Inject} from '@angular/core';
 import { NationalityService } from '../nationality.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,7 +13,8 @@ export class UpdateComponent implements OnInit {
   updateCountryForm = new FormGroup({
     title:new FormControl('')
   });
-  constructor(private service:NationalityService,  public dialogRef: MatDialogRef<UpdateComponent>,
+  constructor(private spinner:LoaderService,
+    private service:NationalityService,  public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,) { 
       this.country = data;
       console.log(data);
@@ -29,9 +31,12 @@ title: this.country.title
 uCountry(){
   const formValue = this.updateCountryForm.getRawValue();
  console.log(formValue);
- 
+ this.spinner.showSpinner();
  this.service.updateCountry(this.country._id, {title:formValue.title}).subscribe((res)=>{
    console.log(res);
+   this.updateCountryForm=res.data;
+   this.dialogRef.close({status:true});
+   this.spinner.hideSpinner();
  })
 }
 }

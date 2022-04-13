@@ -3,6 +3,7 @@ import { CreateComponent } from '../create/create.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateComponent } from '../update/update.component';
 import { PropertyCategoriesService } from '../property-categories.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -14,9 +15,16 @@ export class ListComponent implements OnInit {
   constructor(public dialog: MatDialog, private service:PropertyCategoriesService) { }
 
   ngOnInit(): void {
-    this.service.getPropertyCat().subscribe((res)=>{
-      console.log(res);
-      this.propertyCat=res.data;
+    this.service.getPropertyCat().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.propertyCat= res.data;
+        Swal.fire(`${res.message}`);
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire(`${error.error.message}`);
+      },
     });
   }
   openCreateDialog(){
@@ -34,12 +42,20 @@ export class ListComponent implements OnInit {
     });
   }
   deleteCat(id:any){
-    this.service.deletePCat(id).subscribe((res)=>{
-      console.log(res);
-    });
-    this.service.getPropertyCat().subscribe((res)=>{
-      console.log(res);
-      this.propertyCat=res.data;
-    });
+      this.service.deletePCat(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.propertyCat= res.data;
+          Swal.fire(`${res.message}`);
+        },
+        error: (error) => {
+          console.log(error);
+          Swal.fire(`${error.error.message}`);
+        },
+      });
+      this.service.getPropertyCat().subscribe((res)=>{
+        console.log(res);
+        this.propertyCat=res.data;
+      });
   }
 }

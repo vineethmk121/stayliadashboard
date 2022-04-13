@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateComponent } from '../create/create.component';
@@ -10,19 +11,27 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 10;
   amenities: any[] = [];
-  constructor(public dialog: MatDialog , private aservice:AmenitiesService) { }
+  constructor(public dialog: MatDialog , private aservice:AmenitiesService,private spinner:LoaderService) { }
 
   ngOnInit(): void {
+    this.spinner.showSpinner();
+    this.getAllRecords();
+  }
+  getAllRecords(){
     this.aservice.getAmenities().subscribe({
       next: (res) => {
         console.log(res);
         this.amenities= res.data;
-        Swal.fire(`${res.message}`);
+        this.spinner.hideSpinner();
       },
       error: (error) => {
         console.log(error);
-        Swal.fire(`${error.error.message}`);
+        this.spinner.hideSpinner();
+     
       },
     });
   }
@@ -30,6 +39,9 @@ export class ListComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result?.status){
+        this.getAllRecords();
+      }
     });
   }
   openUpdateDialog(am:any){
@@ -38,13 +50,18 @@ export class ListComponent implements OnInit {
       );
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result?.status){
+        this.getAllRecords();
+      }
     });
   }
   deleteAmenities(amen_id:any){
       console.log(amen_id);
+      this.spinner.showSpinner();
       this.aservice.deleteAmenities(amen_id).subscribe({
         next: (res) => {
           console.log(res);
+          this.spinner.hideSpinner();
           Swal.fire(`${res.message}`);
         },
         error: (error) => {
@@ -62,5 +79,12 @@ export class ListComponent implements OnInit {
           Swal.fire(`${error.error.message}`);
         },
       })
+  }
+  onTableDataChange(event: any) {
+    this.page = event;
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
   }
 }

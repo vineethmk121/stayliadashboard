@@ -1,7 +1,9 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SpecalityService } from '../specality.service';
 import Swal from 'sweetalert2';
+import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'specality-create',
   templateUrl: './create.component.html',
@@ -10,7 +12,7 @@ import Swal from 'sweetalert2';
 export class CreateComponent implements OnInit {
   specForm!: FormGroup;
   ImagePreview!: string;
-  constructor(private fb:FormBuilder, private service:SpecalityService) { }
+  constructor(private fb:FormBuilder, private service:SpecalityService,  private spinner:LoaderService, private dialogRef:MatDialogRef<CreateComponent>) { }
 
   ngOnInit(): void {
     this.specForm = this.fb.group({
@@ -46,10 +48,13 @@ export class CreateComponent implements OnInit {
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.createSpecialities(formData).subscribe({
       next: (res) => {
         console.log(res);
         this.specForm= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

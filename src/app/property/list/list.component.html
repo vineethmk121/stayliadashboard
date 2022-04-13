@@ -170,7 +170,7 @@
           <button mat-mini-fab class="info action-button" routerLink="update">
             <span class="iconify" data-icon="bx:bxs-edit"></span>
           </button>
-          <button mat-mini-fab class="danger action-button">
+          <button mat-mini-fab class="danger action-button" (click)="deletePropertyList(prop._id)">
             <span class="iconify" data-icon="ant-design:delete-filled"></span>
           </button>
         </td>

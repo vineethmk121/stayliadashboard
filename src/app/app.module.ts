@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { LoadingComponent } from './loading/loading.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { LoadingComponent } from './loading/loading.component';
     AppRoutingModule,
     GlobalModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule
    
   ],
   providers: [{
@@ -34,6 +35,7 @@ import { LoadingComponent } from './loading/loading.component';
     useClass: AuthInterceptor,
     multi: true
   }],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

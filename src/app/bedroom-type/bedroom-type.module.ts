@@ -8,7 +8,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BedroomTypeRoutingModule,
     GlobalModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class BedroomTypeModule { }

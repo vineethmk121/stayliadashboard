@@ -7,7 +7,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     ListComponent,
@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     TagRoutingModule,
     GlobalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class TagModule { }

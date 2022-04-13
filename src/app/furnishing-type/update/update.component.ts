@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit,Inject } from '@angular/core';
 import { FurnishingTypeService } from '../furnishing-type.service';
@@ -12,7 +13,8 @@ export class UpdateComponent implements OnInit {
   updateFurnishingForm = new FormGroup({
     title:new FormControl('')
   });
-  constructor(private service:FurnishingTypeService,public dialogRef: MatDialogRef<UpdateComponent>,
+  constructor(private spinner:LoaderService,
+    private service:FurnishingTypeService,public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,) { 
       this.furnishing = data;
       console.log(data);
@@ -30,9 +32,12 @@ export class UpdateComponent implements OnInit {
   furTypeUpdateFun(): void{
     const formValue = this.updateFurnishingForm.getRawValue();
  console.log(formValue);
- 
+ this.spinner.showSpinner();
  this.service.updateFurnishing(this.furnishing._id, {title:formValue.title}).subscribe((res)=>{
    console.log(res);
+   this.updateFurnishingForm=res.data;
+   this.dialogRef.close({status:true});
+   this.spinner.hideSpinner();
  })
   }
 }

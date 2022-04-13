@@ -41,4 +41,10 @@ export class PropertyService {
   createNewProperty(property:FormData):Observable<any>{
     return this.http.post(`${environment.apiBaseURL}admin/property/addProperty`,property)
   }
+  deleteProperty(id:string):Observable<any>{
+    return this.http.delete(`${environment.apiBaseURL}admin/property/deleteProperty/${id}`)
+  }
+  getAdditionalInfo(): Observable<any> {
+    return this.http.get(`${environment.apiBaseURL}admin/additionalInfo/allAddInfo`);
+  }
 }

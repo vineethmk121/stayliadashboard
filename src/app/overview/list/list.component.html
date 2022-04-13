@@ -27,7 +27,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let overViewObj of overview">
+            <tr *ngFor="let overViewObj of overview | paginate:{ itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+            }; let i = index">
                 <td>{{overViewObj.title}}</td>
                 <td><img src={{overViewObj.overViewIcon}} alt=""></td>
                 <td class="action">
@@ -38,7 +41,23 @@
           
         </tbody>
     </table>
-    <ul class="pagination">
+    <style>
+        .my-pagination /deep/ .ngx-pagination .current {
+          background: #5e72e4;
+          border-radius: 50%;
+          height: 39px;
+            line-height: 34px;
+            width: 39px;
+        }
+      </style>
+    <pagination-controls
+    class="my-pagination"
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)"
+  >
+  </pagination-controls>
+    <!-- <ul class="pagination">
         <li class="page-item">
             <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-left"></span></a>
         </li>
@@ -60,5 +79,5 @@
         <li class="page-item">
             <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-right"></span></a>
         </li>
-    </ul>
+    </ul> -->
 </div>

@@ -1,6 +1,8 @@
+import { LoaderService } from './../../services/loader.service';
 import { Component, OnInit } from '@angular/core';
 import { AmenitiesService } from '../amenities.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'amenities-create',
@@ -10,7 +12,7 @@ import Swal from 'sweetalert2';
 export class CreateComponent implements OnInit {
   amenForm!: FormGroup;
   ImagePreview!: string;
-  constructor(private service:AmenitiesService , private fb:FormBuilder) { }
+  constructor(private service:AmenitiesService , private fb:FormBuilder, private dialogRef:MatDialogRef<CreateComponent>, private spinner:LoaderService ) { }
 
   ngOnInit(): void {
     this.amenForm = this.fb.group({
@@ -36,9 +38,10 @@ export class CreateComponent implements OnInit {
 addAmenties(){
     console.log(this.amenForm);
     if (this.amenForm.invalid) {
-      Object.keys(this.amenForm.controls).forEach((key) => {
-        this.amenForm.controls[key].markAsTouched();
-      });
+      // Object.keys(this.amenForm.controls).forEach((key) => {
+      //   this.amenForm.controls[key].markAsTouched();
+      // });
+      this.amenForm.markAllAsTouched();
       return;
     }
     const UserForm = this.amenForm.value;
@@ -46,10 +49,13 @@ addAmenties(){
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.createAmenities(formData).subscribe({
       next: (res) => {
         console.log(res);
         this.amenForm= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

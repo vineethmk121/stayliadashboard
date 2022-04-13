@@ -26,7 +26,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let br of bedRoom">
+            <tr *ngFor="let br of bedRoom | paginate:{ itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+            }; let i = index">
                 <td>{{br.title}}</td>
                 <td class="action">
                     <button mat-mini-fab class="info action-button" (click)="openUpdateDialog(br)"><span class="iconify" data-icon="bx:bxs-edit"></span></button>
@@ -36,7 +39,23 @@
            
         </tbody>
     </table>
-    <ul class="pagination">
+    <style>
+        .my-pagination /deep/ .ngx-pagination .current {
+          background: #5e72e4;
+          border-radius: 50%;
+          height: 39px;
+            line-height: 34px;
+            width: 39px;
+        }
+      </style>
+    <pagination-controls
+    class="my-pagination"
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)"
+  >
+  </pagination-controls>
+    <!-- <ul class="pagination">
         <li class="page-item">
             <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-left"></span></a>
         </li>
@@ -58,5 +77,5 @@
         <li class="page-item">
             <a class="page-link" href="javascript:;"><span class="iconify" data-icon="uim:angle-right"></span></a>
         </li>
-    </ul>
+    </ul> -->
 </div>

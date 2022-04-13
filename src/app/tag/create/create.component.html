@@ -1,22 +1,22 @@
 <h1 mat-dialog-title>Add Tag</h1>
 <form [formGroup]="tagForm"  >
     <div mat-dialog-content  class="form-section">
-        <div class="section-item oneline">
+        <div class="section-item oneline block">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Title" formControlName="title">
             </mat-form-field>
-            <small
+            <mat-error
             *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
-            >Field is Required</small
+            >Field is Required</mat-error
           >
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Description</mat-label>
                 <input matInput placeholder="Description" formControlName="description">
             </mat-form-field>
-            <small
+            <mat-error
             *ngIf="userFormControl['description'].touched && userFormControl['description'].errors?.['required']"
-            >Field is Required</small
+            >Field is Required</mat-error
           >
         </div>
     </div>

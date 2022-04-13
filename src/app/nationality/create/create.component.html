@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>Add Nationality</h1>
 <form [formGroup]="nationalityForm">
     <div mat-dialog-content  class="form-section">
-        <div class="section-item oneline">
+        <div class="section-item oneline block">
             <mat-form-field appearance="outline" class="item">
                 <mat-label>Title</mat-label>
                 <input matInput placeholder="Title" formControlName="title">
-                <small
+                <mat-error
             *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
-            >Field is Required</small
+            >Field is Required</mat-error
           >
             </mat-form-field>
         </div>

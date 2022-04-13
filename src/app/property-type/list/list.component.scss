@@ -1,1 +1,9 @@
 @import '../../../scss/action-button';
+pagination-controls{
+      text-align: center !important;
+      margin-top: 30px;
+}
+.ngx-pagination .current{
+      background: #5e72e4 !important;
+      border-radius: 50% !important;
+}

@@ -1,3 +1,5 @@
+import { MatDialogRef } from '@angular/material/dialog';
+import { LoaderService } from './../../services/loader.service';
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -35,7 +37,7 @@ export class CreateComponent implements OnInit {
       this.filters.splice(index, 1);
     }
   }
-  constructor(private service:PropertyTypeService, private fb:FormBuilder) { }
+  constructor(private service:PropertyTypeService, private fb:FormBuilder, private spinner:LoaderService,  private dialogRef:MatDialogRef<CreateComponent>) { }
 
   ngOnInit(): void {
     this.proTypeForm=this.fb.group({
@@ -45,15 +47,25 @@ export class CreateComponent implements OnInit {
   }
   SaveProType(){
     console.log(this.proTypeForm);
+    if (this.proTypeForm.invalid) {
+      // Object.keys(this.amenForm.controls).forEach((key) => {
+      //   this.amenForm.controls[key].markAsTouched();
+      // });
+      this.proTypeForm.markAllAsTouched();
+      return;
+    }
     const UserForm = this.proTypeForm.value;
     let formData = new FormData();
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.addPropertyType(UserForm).subscribe({
       next: (res) => {
         console.log(res);
         this.proTypeForm= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

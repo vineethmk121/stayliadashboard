@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit ,Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -12,7 +13,7 @@ export class UpdateComponent implements OnInit {
   ImagePreview!:string;
   amenities:any;
   constructor(private service:AmenitiesService, public dialogRef: MatDialogRef<UpdateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,) { 
+    @Inject(MAT_DIALOG_DATA) public data: any, private spinner:LoaderService) { 
       this.amenities = data;
       console.log(data);
     }
@@ -46,13 +47,6 @@ export class UpdateComponent implements OnInit {
     }
   }
   updateAmen(){
-    // console.log('update');
-    
-    // const formValue = this.updateAmenities.getRawValue();
-    // console.log(formValue);
-    //   this.service.updateAmenties(this.amenities._id,this.updateAmenities.value).subscribe((res)=>{
-    //     console.log(res);
-    //   })
     console.log(this.updateAmenities);
     if (this.updateAmenities.invalid) {
       Object.keys(this.updateAmenities.controls).forEach((key) => {
@@ -65,10 +59,13 @@ export class UpdateComponent implements OnInit {
     for (let x in UserForm) {
       formData.append(`${x}`, UserForm[x]);
     }
+    this.spinner.showSpinner();
     this.service.updateAmenties(this.amenities._id,formData).subscribe({
       next: (res) => {
         console.log(res);
         this.updateAmenities= res.data;
+        this.dialogRef.close({status:true});
+        this.spinner.hideSpinner();
         Swal.fire(`${res.message}`);
       },
       error: (error) => {

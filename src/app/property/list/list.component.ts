@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PropertyService } from '../property.service';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'property-list',
   templateUrl: './list.component.html',
@@ -37,5 +38,22 @@ export class ListComponent implements OnInit {
   onChangeMainFilter() {
     let mianFilter = this.filterForm.get('mainFilter');
     console.log(mianFilter?.value);
+  }
+  deletePropertyList(Pid:any){
+    this.service.deleteProperty(Pid).subscribe((res)=>{
+      console.log(res);  
+      this.service.getAllProperties().subscribe({
+        next: (res) => {
+          console.log(res);
+          this.property= res.data;
+          Swal.fire(`${res.message}`);
+        },
+        error: (error) => {
+          console.log(error);
+          Swal.fire(`${error.error.message}`);
+        },
+      });
+  });
+ 
   }
 }
