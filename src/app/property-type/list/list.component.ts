@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
  page: number = 1;
   count: number = 0;
   tableSize: number = 10;
+  term: any;
   constructor(public dialog: MatDialog, private service:PropertyTypeService, private spinner:LoaderService) { }
 
   ngOnInit(): void {

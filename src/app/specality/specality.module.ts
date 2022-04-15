@@ -7,7 +7,8 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { GlobalModule } from '../global/global.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ListComponent,
@@ -18,7 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     SpecalityRoutingModule,
     GlobalModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ]
 })
 export class SpecalityModule { }

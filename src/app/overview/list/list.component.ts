@@ -17,6 +17,7 @@ export class ListComponent implements OnInit {
   count: number = 0;
   tableSize: number = 10;
   overview:any[]=[];
+  term:any;
   ngOnInit(): void {
    this.getAllRecords();
   }

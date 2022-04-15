@@ -11,7 +11,7 @@
         <div class="title">Bedroom Type</div>
         <div class="right-section">
             <div class="input-group search">
-                <input class="form-control" placeholder="Search" type="text">
+                <input class="form-control" placeholder="Search" type="text" [(ngModel)]="term">
                 <div class="input-group-append">
                     <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
                 </div>
@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let br of bedRoom | paginate:{ itemsPerPage: tableSize,
+            <tr *ngFor="let br of bedRoom  | filter:term | paginate:{ itemsPerPage: tableSize,
                 currentPage: page,
                 totalItems: count
             }; let i = index">

@@ -11,6 +11,10 @@ import { GlobalModule } from '../global/global.module';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     ListComponent,
@@ -26,7 +30,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HttpClientJsonpModule,
     MatGridListModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    Ng2SearchPipeModule,
+    FormsModule,
+    NgxPaginationModule
   ],
 })
 export class PropertyModule {}

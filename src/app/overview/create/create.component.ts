@@ -17,6 +17,7 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
     this.OverViewForm = this.fb.group({
       title:[null, Validators.required],
+      value:[null, Validators.required],
       overViewIcon: [null, Validators.required],
     });
   }

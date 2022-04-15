@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   count: number = 0;
   tableSize: number = 10;
   amenities: any[] = [];
+  term: any;
   constructor(public dialog: MatDialog , private aservice:AmenitiesService,private spinner:LoaderService) { }
 
   ngOnInit(): void {

@@ -11,7 +11,7 @@
         <div class="title">Additional Information</div>
         <div class="right-section">
             <div class="input-group search">
-                <input class="form-control" placeholder="Search" type="text" >
+                <input class="form-control" placeholder="Search" type="text" [(ngModel)]="term">
                 <div class="input-group-append">
                     <span class="iconify" data-icon="bx:bx-search-alt-2"></span>
                 </div>
@@ -22,12 +22,12 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
+                <th>Value</th>
                 <th class="action">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let add_info of info | paginate:{ itemsPerPage: tableSize,
+            <tr *ngFor="let add_info of info | filter:term | paginate:{ itemsPerPage: tableSize,
                 currentPage: page,
                 totalItems: count
             }; let i = index">

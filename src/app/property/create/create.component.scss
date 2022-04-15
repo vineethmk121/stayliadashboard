@@ -46,7 +46,7 @@ td {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .maps {
-  width: 90%;
+  width: 68%;
   height: 300px;
 }
 .block{
@@ -54,4 +54,29 @@ td {
 }
 .cus-width{
   width:100%;
+}
+.am_img{
+  width:30px;
+  display:block;
+}
+.item{
+  width:348px !important;
+}
+.cus_check{
+  margin:0px 60px;
+  padding: 30px 0;
+  opacity: 0.8;
+}
+.checkbox-column{
+  display: inline-block;
+  width: 200px; 
+}
+.card-shd{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.cus-title{
+  padding: 20px;
+  color: #5e72e4;
+  font-size: 16px;
+  font-weight: bold;
 }

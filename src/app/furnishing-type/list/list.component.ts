@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   count: number = 0;
   tableSize: number = 10;
 furType :any[] = [];
+term:any;
   constructor(public dialog: MatDialog, private service:FurnishingTypeService, private spinner:LoaderService) { }
 
   ngOnInit(): void {

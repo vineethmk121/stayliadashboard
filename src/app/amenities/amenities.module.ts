@@ -10,7 +10,7 @@ import { GlobalModule } from '../global/global.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from "ngx-spinner";
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     ListComponent,
@@ -26,7 +26,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    Ng2SearchPipeModule
   ]
 })
 export class AmenitiesModule { }

@@ -47,4 +47,7 @@ export class PropertyService {
   getAdditionalInfo(): Observable<any> {
     return this.http.get(`${environment.apiBaseURL}admin/additionalInfo/allAddInfo`);
   }
+  getProperty(id:string): Observable<any> {
+    return this.http.get(`${environment.apiBaseURL}admin/property/viewProperty/${id}`);
+  }
 }

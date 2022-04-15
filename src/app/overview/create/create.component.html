@@ -7,9 +7,13 @@
                 <input matInput placeholder="Title" formControlName="title">
             </mat-form-field>
             <mat-error
-            *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']"
-            >Field is Required</mat-error
-          >
+            *ngIf="userFormControl['title'].touched && userFormControl['title'].errors?.['required']">Field is Required</mat-error>
+            <mat-form-field appearance="outline" class="item">
+                <mat-label>Value</mat-label>
+                <input matInput placeholder="Value" formControlName="value">
+            </mat-form-field>
+            <mat-error
+            *ngIf="userFormControl['value'].touched && userFormControl['value'].errors?.['required']">Field is Required</mat-error>
             <div class="form-control item">
                 <mat-label>Icon</mat-label>&nbsp;
                 <input type="file"

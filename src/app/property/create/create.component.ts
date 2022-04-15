@@ -4,6 +4,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { HttpClient } from '@angular/common/http';
 import { Loader } from '@googlemaps/js-api-loader';
 import { PropertyService } from '../property.service';
+import { MatDialog } from '@angular/material/dialog';
+
 import Swal from 'sweetalert2'
 @Component({
   selector: 'property-create',
@@ -11,6 +13,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
+  addImg:any;
   ImagePreview!: string;
   country: any[] = [];
   Property_type: any[] = [];
@@ -24,6 +27,7 @@ export class CreateComponent implements OnInit {
   additionalInfo: any[] =[];
   propertyForm: any;
   center = { lat: 32.16515, lng: 74.184505 };
+  user:any;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -73,7 +77,7 @@ export class CreateComponent implements OnInit {
     height: 'auto',
     minHeight: '0',
     maxHeight: 'auto',
-    width: 'auto',
+    width: '717px',
     minWidth: '0',
     translate: 'yes',
     enableToolbar: true,
@@ -125,23 +129,26 @@ export class CreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     httpClient: HttpClient,
-    private service: PropertyService
+    private service: PropertyService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('data');
+    this.user = JSON.parse(this.user);
+   
     this.ConfigForm = this.fb.group({
-      // Configuration: this.fb.array([this.addConfigGroup()]),
-      // details: this.fb.array([this.addSideBarControl()]),
+       details: this.fb.array([this.addSideBarControl()]),
       title: [null, Validators.required],
       description: [null, Validators.required],
-      // longitude: [null, Validators.required],
-      // latitude: [null, Validators.required],
+      // lng: [null, Validators.required],
+      //  lat: [null, Validators.required],
       city: [null, Validators.required],
-      // status: [null, Validators.required],
-      // totalArea: [null, Validators.required],
-      // totalLaunchedApparments: [null, Validators.required],
-      // availability: [null, Validators.required],
-      // editor: [null, Validators.required],
+      status: [null, Validators.required],
+      totalArea: [null, Validators.required],
+      totalLaunchedApparments: [null, Validators.required],
+      availability: [null, Validators.required],
+      editor: [null, Validators.required],
       country:[null, Validators.required],
       address: [null, Validators.required],
       neighbourHood: [null, Validators.required],
@@ -179,7 +186,7 @@ export class CreateComponent implements OnInit {
       landStatusId:[null,Validators.required],
       furnishingStatusId:[null,Validators.required],
       agency:['620f78e73be80b47580554d0'],
-      createdBy:['62446562deca2b0ff06191d6'],
+      createdBy:[this.user?.userId],
       listedDate:[null,Validators.required],
       setAsFeature:[null,Validators.required],
       propertySaleType:[null,Validators.required],
@@ -210,8 +217,8 @@ export class CreateComponent implements OnInit {
         console.log(lat, lng);
         this.map.panTo(evt.latLng);
         this.ConfigForm.patchValue({
-          longitude: lng,
-          latitude: lat,
+          lng: lng,
+          lat: lat,
         });
       });
     });
@@ -388,51 +395,70 @@ export class CreateComponent implements OnInit {
     }
     }
   uploadFiles(event: any) : void {
-    const file = event.target.files[0];
+    const file = event.target.files;
     console.log(file);
 
     this.ConfigForm.patchValue({
       gallaryImages: file,
     });
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.ImagePreview = reader.result as string;
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.ImagePreview = reader.result as string;
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
   }
   uploadFiles1(event: any) : void {
-    const file = event.target.files[0];
+    const file = event.target.files;
     console.log(file);
 
     this.ConfigForm.patchValue({
       sliderImages: file,
     });
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.ImagePreview = reader.result as string;
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.ImagePreview = reader.result as string;
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
   }
   uploadFiles2(event: any) : void {
-    const file = event.target.files[0];
+    const file = event.target.files;
     console.log(file);
 
     this.ConfigForm.patchValue({
       propertyPlan: file,
     });
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.ImagePreview = reader.result as string;
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.ImagePreview = reader.result as string;
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
+  }
+  uploadFiles3(event: any) : void {
+    const file = event.target.files;
+    console.log(file);
+    this.addImg = file[0].name;
+    console.log(this.addImg);
+    this.ConfigForm.patchValue({
+      addImg: file,
+    });
+   
+    
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   this.ImagePreview = reader.result as string;
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
   }
   onSubmit() {
+console.log('saad');
     console.log(this.ConfigForm.value);
     console.log(this.ConfigForm);
     if (this.ConfigForm.invalid) {
